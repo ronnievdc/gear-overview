@@ -1,0 +1,197 @@
+local lib = GearOverview
+
+local order = {
+    [EQUIP_TYPE_HEAD] = 1,
+    [EQUIP_TYPE_SHOULDERS] = 2,
+    [EQUIP_TYPE_CHEST] = 3,
+    [EQUIP_TYPE_HAND] = 4,
+    [EQUIP_TYPE_WAIST] = 5,
+    [EQUIP_TYPE_LEGS] = 6,
+    [EQUIP_TYPE_FEET] = 7,
+    [EQUIP_TYPE_NECK] = 8,
+    [EQUIP_TYPE_RING] = 9,
+    [EQUIP_TYPE_MAIN_HAND] = -1,
+    [EQUIP_TYPE_OFF_HAND] = -1,
+    [EQUIP_TYPE_ONE_HAND] = -1,
+    [EQUIP_TYPE_TWO_HAND] = -1
+}
+
+local orderWeapons = {
+    [WEAPONTYPE_DAGGER] = 10,
+    [WEAPONTYPE_AXE] = 11,
+    [WEAPONTYPE_HAMMER] = 12,
+    [WEAPONTYPE_SWORD] = 13,
+    [WEAPONTYPE_TWO_HANDED_AXE] = 14,
+    [WEAPONTYPE_TWO_HANDED_HAMMER] = 15,
+    [WEAPONTYPE_TWO_HANDED_SWORD] = 16,
+    [WEAPONTYPE_BOW] = 17,
+    [WEAPONTYPE_HEALING_STAFF] = 18,
+    [WEAPONTYPE_FIRE_STAFF] = 19,
+    [WEAPONTYPE_FROST_STAFF] = 20,
+    [WEAPONTYPE_LIGHTNING_STAFF] = 21,
+    [WEAPONTYPE_SHIELD] = 22
+}
+
+function lib.trimString(s)
+    return (string.gsub(s, "^%s*(.-)%s*$", "%1"))
+end
+
+--- Scans all available sets in the game and creates a mapping from setName to setId
+function lib.scanSets()
+    -- As of "Update 33 Ascending Tide DLC" there are 636 sets, scan till 700 to be future ready
+    for itemSetId = 1, 700, 1 do
+        local setName = GetItemSetName(itemSetId)
+        if setName then
+            lib.setNameToId[string.lower(setName)] = itemSetId
+        end
+    end
+end
+
+--- Gets the position of the item in the matrix
+--- @param itemLink string link to the order number from
+--- @return number the order number in the display table
+function lib.getOrderNumber(itemLink)
+    local orderNumber = order[GetItemLinkEquipType(itemLink)]
+    if orderNumber == -1 then
+        orderNumber = orderWeapons[GetItemLinkWeaponType(itemLink)]
+    end
+    return orderNumber
+end
+
+--- Adds the items from the given bag to the list of owned items
+--- @param bag table the bag to search in
+--- @return void
+function lib.getItems(bag)
+    for slotId = 0, GetBagSize(bag) do
+        local _, _, _, _, _, equipType, _, _ = GetItemInfo(bag, slotId)
+        if equipType ~= EQUIP_TYPE_INVALID then
+            local itemLink = GetItemLink(bag, slotId)
+            lib.processItemLink(itemLink)
+        end
+    end
+end
+
+--- Return all the keys in the table
+--- @param table table data
+--- @return table (unsorted)list of keys in the table
+function lib.getTableKeys(table)
+    local keys = {}
+    local n = 0
+    for k, v in pairs(table) do
+        n = n + 1
+        keys[n] = k
+    end
+    return keys
+end
+
+--- Adds the items to the list of owned items
+--- @param itemLink string string item link of the item to add
+--- @return void
+function lib.processItemLink(itemLink)
+    local hasSet, _, _, _, _, setId = GetItemLinkSetInfo(itemLink)
+    local quality = GetItemLinkDisplayQuality(itemLink)
+    if hasSet then
+        local orderNumber = lib.getOrderNumber(itemLink)
+        if not lib.bag[setId] then
+            lib.bag[setId] = { [orderNumber] = quality }
+        else
+            if lib.bag[setId][orderNumber] then
+                if quality > lib.bag[setId][orderNumber] then
+                    lib.bag[setId][orderNumber] = quality
+                end
+            else
+                lib.bag[setId][orderNumber] = quality
+            end
+        end
+    end
+end
+
+function lib.fetchItems()
+    lib.getItems(BAG_BACKPACK)
+    lib.getItems(BAG_BANK)
+    lib.getItems(BAG_SUBSCRIBER_BANK)
+    lib.getItems(BAG_WORN)
+
+    if IIfA then
+        lib.log(lib.LOG_LEVEL_INFO, "Searching IIfA database")
+        for itemLink, _ in pairs(IIfA.database) do
+            lib.processItemLink(itemLink)
+        end
+    else
+        lib.log(lib.LOG_LEVEL_INFO, "Download Inventory Insight to add the items for all characters")
+    end
+end
+
+function lib.parseSets(value)
+    if string.len(value) then
+        lib.log(lib.LOG_LEVEL_INFO, "Parse custom sets")
+        lib.custom = true
+        lib.customList = {}
+        for setName in string.gmatch(value, "[^\n\r]+") do
+            if string.len(setName) then
+                local setId = lib.setNameToId[string.lower(lib.trimString(setName))]
+                if setId then
+                    lib.log(lib.LOG_LEVEL_INFO, "Set", setName, setId)
+                    table.insert(lib.customList, { name = GetItemSetName(itemSetId), id = setId })
+                else
+                    lib.log(lib.LOG_LEVEL_WARNING, "Unknown set", setName)
+                end
+            end
+        end
+    end
+end
+
+function lib.takeScreenshot()
+    local myList = lib.getSetList()
+    if not myList then
+        return
+    end
+    lib.fetchItems()
+    lib.scrollList:Update(myList)
+
+    GearOverviewListButtonScreenshot:SetHidden(true)
+    GearOverviewListButtonCloseAddon:SetHidden(true)
+
+    --SCENE_MANAGER:HideScene(SCENE_MANAGER:GetScene("hud"))
+    --SCENE_MANAGER:HideScene(SCENE_MANAGER:GetScene("hudui"))
+    local currentScene = SCENE_MANAGER:GetCurrentSceneName()
+    --SCENE_MANAGER:SwapCurrentScene("GearOverviewListScene")
+    SCENE_MANAGER:Push("GearOverviewListScene")
+    SetFrameLocalPlayerInGameCamera(true)
+    SetFrameLocalPlayerTarget(0.15, 0.65)
+
+    local chatShown = CHAT_SYSTEM:IsHidden()
+    local minbarShown = CHAT_SYSTEM.isMinimized
+    if not chatShown then
+        CHAT_SYSTEM:Minimize()
+        CHAT_SYSTEM:HideMinBar()
+    end
+    if minbarShown then
+        CHAT_SYSTEM:HideMinBar()
+    end
+    --HUD_SCENE:SetState(SCENE_GROUP_HIDDEN)
+    zo_callLater(function()
+        --SetGuiHidden('ingame', true)
+        TakeScreenshot()
+        --GearOverview:Show()
+        zo_callLater(function()
+
+            --SCENE_MANAGER:SwapCurrentScene(currentScene)
+            SetFrameLocalPlayerTarget(0.5, 0.65)
+            SetFrameLocalPlayerInGameCamera(false)
+            SCENE_MANAGER:Push(currentScene)
+            if not chatShown then
+                CHAT_SYSTEM:Maximize()
+            end
+            if minbarShown then
+                CHAT_SYSTEM:ShowMinBar()
+            end
+            GearOverviewListButtonScreenshot:SetHidden(false)
+            GearOverviewListButtonCloseAddon:SetHidden(false)
+            --SCENE_MANAGER:ShowScene(SCENE_MANAGER:GetScene("hud"))
+            --SCENE_MANAGER:ShowScene(SCENE_MANAGER:GetScene("hudui"))
+        end, 1000)
+
+    end, 1000)
+
+end
