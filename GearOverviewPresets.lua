@@ -1,14 +1,15 @@
 local lib = GearOverview
 lib.presets = {
 	["PugESO Healers"] = {
+		-- Required
 		{name="Spell Power Cure", id=185},
 		{name="Hollowfang Thirst", id=452},
 
 		{name="Roaring Opportunist", id=496},
+		{name="Perfected Roaring Opportunist", id=497},
 		{name="Jorvuld's Guidance", id=346},
 
 		{name="The Worm's Raiment", id=124},
-		{name="Perfected Roaring Opportunist", id=497},
 		{name="Vestment of Olorime", id=391},
 		{name="Perfected Vestment of Olorime", id=395},
 		{name="Way of Martial Knowledge", id=147},
@@ -22,6 +23,10 @@ lib.presets = {
 		{name="The Troll King (Monster Helm)", id=278},
 		{name="Encratis's Behemoth (Monster Helm)", id=577},
 		{name="Sentinel of Rkugamz (Monster Helm)", id=268},
+
+		-- Mythic
+        {name="Spaulder of Ruin", id=627, pieces=1},
+        {name="Pearls of Ehlnofey", id=576, pieces=1},
 	},
 	["PugESO Tanks"] = {
 	    -- Required
@@ -36,8 +41,8 @@ lib.presets = {
 		{name="Elemental Catalyst", id=516},
 
 		-- Arena
-		{name="Perfected Puncturing Remedy", id=529, pieces=5},
         {name="Puncturing Remedy", id=314, pieces=5},
+		{name="Perfected Puncturing Remedy", id=529, pieces=5},
 
         -- Monster
         {name="Encratis's Behemoth (Monster Helm)", id=577},
@@ -55,8 +60,8 @@ lib.presets = {
         {name="Perfected Vestment of Olorime", id=395},
 
         -- Arena
-        {name="Perfected Rampaging Slash", id=523, pieces=5},
         {name="Rampaging Slash", id=370, pieces=5},
+		{name="Perfected Rampaging Slash", id=523, pieces=5},
 
         -- Monster
         {name="Earthgore (Monster Helm)", id=341},

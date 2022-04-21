@@ -1,108 +1,168 @@
 <GuiXml>
     <Controls>
-        <TopLevelControl name="GearOverviewList" mouseEnabled="true" movable="true" clampedToScreen="true"
+        <TopLevelControl name="GearOverviewUI" mouseEnabled="true" movable="true" clampedToScreen="true"
                          hidden="true">
-            <Dimensions x="1133" y="850"/>
-            <Anchor point="RIGHT" relativeTo="$(parent)" relativePoint="RIGHT" offsetX="-60"/>
+            <Anchor point="BOTTOMRIGHT" relativeTo="$(parent)" relativePoint="BOTTOMRIGHT" offsetX="0"/>
+            <Dimensions x="994" y="970"/>
+
             <Controls>
-
-                <Backdrop name="$(parent)BG" inherits="ZO_DefaultBackdrop"/>
-
-                <Label name="$(parent)WindowTitle" horizontalAlignment="CENTER" font="ZoFontAnnounceLarge"
-                       text="|cFFD700Gear Set Overview|r">
+                <Backdrop name="$(parent)BG" edgeColor="00000000">
                     <AnchorFill/>
-                </Label>
+                    <Center file="EsoUI/Art/Miscellaneous/centerscreen_left.dds"/>
+                </Backdrop>
+                <Control name="$(parent)_INNER">
+                    <Anchor point="TOPLEFT" relativeTo="$(parent)" offsetX="50" offsetY="64"/>
+                    <Anchor point="BOTTOMRIGHT" relativeTo="$(parent)" offsetX="-26" offsetY="-164"/>
+                    <Controls>
+                        <Label name="$(parent)WindowTitle" horizontalAlignment="LEFT" font="ZoFontWindowTitle"
+                               color="INTERFACE_COLOR_TYPE_TEXT_COLORS:INTERFACE_TEXT_COLOR_SELECTED"
+                               text="Gear overview" modifyTextType="UPPERCASE">
+                            <Anchor point="TOPLEFT" offsetX="0" offsetY="10" relativeTo="$(parent)"/>
+                        </Label>
 
-                <Texture name="$(parent)TopDivider" textureFile="/esoui/art/miscellaneous/horizontaldivider.dds"
-                         tier="HIGH">
-                    <Dimensions x="1133" y="4"/>
-                    <Anchor point="TOP" relativeTo="$(parent)" offsetY="38"/>
-                </Texture>
+                        <Button name="$(grandparent)TabSettings">
+                            <Dimensions x="51" y="51"/><!-- 64 on hover -->
+                            <Anchor point="BOTTOM" relativeTo="$(parent)" relativePoint="TOPRIGHT" offsetY="52"
+                                    offsetX="-30"/>
+                            <Textures normal="/esoui/art/skillsadvisor/advisor_tabicon_settings_up.dds"
+                                      pressed="/esoui/art/skillsadvisor/advisor_tabicon_settings_down.dds"
+                                      mouseOver="/esoui/art/skillsadvisor/advisor_tabicon_settings_over.dds"
+                                      disabled="/esoui/art/skillsadvisor/advisor_tabicon_settings_up.dds"/>
+                            <OnClicked>
+                                GearOverview.switchTab("SETTINGS")
+                            </OnClicked>
+                            <OnMouseEnter>
+                                self:SetScale(1.25)
+                            </OnMouseEnter>
+                            <OnMouseExit>
+                                if self:GetState() ~= BSTATE_PRESSED then
+                                    self:SetScale(1)
+                                end
+                            </OnMouseExit>
+                        </Button>
 
-                <Button name="$(parent)ButtonCloseAddon" inherits="ZO_ButtonBehaviorClickSound">
-                    <Dimensions x="40" y="40"/>
-                    <Anchor point="TOPRIGHT" relativeTo="$(parent)" relativePoint="TOPRIGHT" offsetX="15"/>
-                    <Textures normal="EsoUI/Art/Buttons/closebutton_up.dds"
-                              pressed="EsoUI/Art/Buttons/closebutton_down.dds"
-                              mouseOver="EsoUI/Art/Buttons/closebutton_mouseover.dds"
-                              disabled="EsoUI/Art/Buttons/closebutton_disabled.dds"/>
-                    <OnClicked>
-                        GearOverviewList:SetHidden(true)
-                    </OnClicked>
-                </Button>
-                <Button name="$(parent)ButtonScreenshot" inherits="ZO_ButtonBehaviorClickSound">
-                    <Dimensions x="40" y="40"/>
-                    <Anchor point="BOTTOMRIGHT" relativeTo="$(parent)" relativePoint="BOTTOMRIGHT"/>
-                    <Textures normal="/esoui/art/buttons/edit_save_up.dds"
-                              pressed="/esoui/art/buttons/edit_save_down.dds"
-                              mouseOver="EsoUI/Art/Buttons/edit_save_over.dds"
-                              disabled="EsoUI/Art/Buttons/edit_save_disabled.dds"/>
-                    <OnClicked>
-                        GearOverview.takeScreenshot()
-                    </OnClicked>
-                </Button>
-                <Label name="$(parent)PlayerName" horizontalAlignment="CENTER" font="ZoFontGame">
-                    <Anchor point="BOTTOMLEFT" relativeTo="$(parent)" relativePoint="BOTTOMLEFT"/>
-                    <OnInitialized>
-                        local name = GetUnitDisplayName('player')
-                        self:SetText(name)
-                    </OnInitialized>
-                </Label>
+                        <Button name="$(grandparent)TabGear">
+                            <Dimensions x="51" y="51"/>
+                            <Anchor point="BOTTOM" relativeTo="$(parent)" relativePoint="TOPRIGHT" offsetY="52"
+                                    offsetX="-82"/>
+                            <Textures normal="esoui/art/inventory/inventory_tabicon_armor_up.dds"
+                                      pressed="esoui/art/inventory/inventory_tabicon_armor_down.dds"
+                                      mouseOver="esoui/art/inventory/inventory_tabicon_armor_over.dds"/>
+                            <ButtonState state="BSTATE_PRESSED" />
+                            <OnClicked>
+                                GearOverview.switchTab("GEAR")
+                            </OnClicked>
+                            <OnMouseEnter>
+                                self:SetScale(1.25)
+                            </OnMouseEnter>
+                            <OnMouseExit>
+                                if self:GetState() ~= BSTATE_PRESSED then
+                                    self:SetScale(1)
+                                end
+                            </OnMouseExit>
+                        </Button>
+
+                        <Label name="$(grandparent)WindowSubtitle" horizontalAlignment="LEFT"
+                               font="ZoFontKeybindStripDescription"
+                               color="INTERFACE_COLOR_TYPE_TEXT_COLORS:INTERFACE_TEXT_COLOR_SELECTED"
+                               text="Gear" modifyTextType="UPPERCASE">
+                            <Anchor point="BOTTOMRIGHT" offsetX="-122" offsetY="49" relativePoint="TOPRIGHT"
+                                    relativeTo="$(parent)"/>
+                        </Label>
+
+                        <Texture name="$(grandparent)TopDivider" inherits="ZO_Options_Divider">
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)" offsetY="50" offsetX="0"/>
+                            <Anchor point="TOPRIGHT" relativeTo="$(parent)" offsetY="54" offsetX="0"/>
+                        </Texture>
+
+                        <Control name="$(grandparent)GearView">
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)" offsetY="60" offsetX="0"/>
+                            <Anchor point="BOTTOMRIGHT" relativeTo="$(parent)" offsetY="0" offsetX="0"/>
+                            <Controls>
+                                <Control name="$(parent)Header">
+                                    <Anchor point="TOPLEFT" relativeTo="$(parent)" offsetX="258" offsetY="0"/>
+                                    <Controls>
+                                    </Controls>
+                                    <OnInitialized>
+                                        local textures = {
+                                            "esoui/art/tutorial/gamepad/gp_tooltip_itemslot_head.dds",
+                                            "esoui/art/tutorial/gamepad/gp_tooltip_itemslot_shoulders.dds",
+                                            "esoui/art/tutorial/gamepad/gp_tooltip_itemslot_chest.dds",
+                                            "esoui/art/tutorial/gamepad/gp_tooltip_itemslot_hands.dds",
+                                            "esoui/art/tutorial/gamepad/gp_tooltip_itemslot_waist.dds",
+                                            "esoui/art/tutorial/gamepad/gp_tooltip_itemslot_legs.dds",
+                                            "esoui/art/tutorial/gamepad/gp_tooltip_itemslot_feet.dds",
+                                            "esoui/art/tutorial/gamepad/gp_tooltip_itemslot_neck.dds",
+                                            "esoui/art/tutorial/gamepad/gp_tooltip_itemslot_ring.dds",
+                                            "esoui/art/icons/gear_breton_dagger_d.dds",
+                                            "esoui/art/icons/gear_breton_1haxe_d.dds",
+                                            "esoui/art/icons/gear_breton_1hhammer_d.dds",
+                                            "esoui/art/icons/gear_breton_1hsword_d.dds",
+                                            "esoui/art/icons/gear_breton_2haxe_d.dds",
+                                            "esoui/art/icons/gear_breton_2hhammer_d.dds",
+                                            "esoui/art/icons/gear_breton_2hsword_d.dds",
+                                            "esoui/art/icons/gear_breton_bow_d.dds",
+                                            "esoui/art/progression/icon_healstaff.dds",
+                                            "esoui/art/progression/icon_firestaff.dds",
+                                            "esoui/art/progression/icon_icestaff.dds",
+                                            "esoui/art/progression/icon_lightningstaff.dds",
+                                            "esoui/art/icons/gear_breton_shield_d.dds"
+                                        }
+                                        for i=1,22 do
+                                            local button = WINDOW_MANAGER:CreateControl("$(parent)Box"..i, GearOverviewUIGearViewHeader, CT_TEXTURE)
+                                            button:SetDimensions(30, 30)
+                                            button:SetTexture(textures[i])
+                                            if i &lt; 10 then
+                                                button:SetAnchor(TOPLEFT, GearOverviewUIGearViewHeader, TOPLEFT, (i-1)*30, 5)
+                                                button:SetScale(1.25)
+                                                button:SetColor(0.7,0.7,0.7,1)
+                                            elseif i &lt; 18 or i == 22 then
+                                                button:SetAnchor(TOPLEFT, GearOverviewUIGearViewHeader, TOPLEFT, (i-1)*30, 10)
+                                                button:SetScale(1)
+                                            else
+                                                button:SetAnchor(TOPLEFT, GearOverviewUIGearViewHeader, TOPLEFT, (i-1)*30, 0)
+                                                button:SetScale(1.75)
+                                            end
+                                        end
+                                    </OnInitialized>
+                                </Control>
+                                <Button name="$(parent)ButtonScreenshot" inherits="ZO_ButtonBehaviorClickSound">
+                                    <Dimensions x="40" y="40"/>
+                                    <Anchor point="BOTTOMRIGHT" relativeTo="$(parent)" relativePoint="BOTTOMRIGHT"/>
+                                    <Textures normal="/esoui/art/buttons/edit_save_up.dds"
+                                              pressed="/esoui/art/buttons/edit_save_down.dds"
+                                              mouseOver="EsoUI/Art/Buttons/edit_save_over.dds"
+                                              disabled="EsoUI/Art/Buttons/edit_save_disabled.dds"/>
+                                    <OnClicked>
+                                        GearOverview.takeScreenshot()
+                                    </OnClicked>
+                                </Button>
+                                <Label name="$(parent)PlayerName" horizontalAlignment="CENTER" font="ZoFontGame">
+                                    <Anchor point="BOTTOMLEFT" relativeTo="$(parent)" relativePoint="BOTTOMLEFT"/>
+                                    <OnInitialized>
+                                        local name = GetUnitDisplayName('player')
+                                        self:SetText(name)
+                                    </OnInitialized>
+                                </Label>
+                            </Controls>
+                        </Control>
+
+                        <Control name="$(grandparent)SettingsView">
+                            <Anchor point="TOPLEFT" relativeTo="$(parent)" offsetY="60" offsetX="0"/>
+                            <Anchor point="BOTTOMRIGHT" relativeTo="$(parent)" offsetY="0" offsetX="0"/>
+                        </Control>
+                    </Controls>
+                </Control>
             </Controls>
-            <OnInitialized>
-                local textures = {
-                    "esoui/art/tutorial/gamepad/gp_tooltip_itemslot_head.dds",
-                    "esoui/art/tutorial/gamepad/gp_tooltip_itemslot_shoulders.dds",
-                    "esoui/art/tutorial/gamepad/gp_tooltip_itemslot_chest.dds",
-                    "esoui/art/tutorial/gamepad/gp_tooltip_itemslot_hands.dds",
-                    "esoui/art/tutorial/gamepad/gp_tooltip_itemslot_waist.dds",
-                    "esoui/art/tutorial/gamepad/gp_tooltip_itemslot_legs.dds",
-                    "esoui/art/tutorial/gamepad/gp_tooltip_itemslot_feet.dds",
-                    "esoui/art/tutorial/gamepad/gp_tooltip_itemslot_neck.dds",
-                    "esoui/art/tutorial/gamepad/gp_tooltip_itemslot_ring.dds",
-                    "esoui/art/icons/gear_breton_dagger_d.dds",
-                    "esoui/art/icons/gear_breton_1haxe_d.dds",
-                    "esoui/art/icons/gear_breton_1hhammer_d.dds",
-                    "esoui/art/icons/gear_breton_1hsword_d.dds",
-                    "esoui/art/icons/gear_breton_2haxe_d.dds",
-                    "esoui/art/icons/gear_breton_2hhammer_d.dds",
-                    "esoui/art/icons/gear_breton_2hsword_d.dds",
-                    "esoui/art/icons/gear_breton_bow_d.dds",
-                    "esoui/art/progression/icon_healstaff.dds",
-                    "esoui/art/progression/icon_firestaff.dds",
-                    "esoui/art/progression/icon_icestaff.dds",
-                    "esoui/art/progression/icon_lightningstaff.dds",
-                    "esoui/art/icons/gear_breton_shield_d.dds"
-                }
-                for i=1,22 do
-                    local button = WINDOW_MANAGER:CreateControl("$(parent)Box"..i, GearOverviewList, CT_TEXTURE)
-                    button:SetDimensions(30, 30)
-
-                    button:SetTexture(textures[i])
-                    if i &lt; 10 then
-                        button:SetAnchor(TOPLEFT, rowControl, TOPLEFT, 414+i*30, 50)
-                        button:SetScale(1.25)
-                        button:SetColor(0.7,0.7,0.7,1)
-                    elseif i &lt; 18 or i == 22 then
-                        button:SetAnchor(TOPLEFT, rowControl, TOPLEFT, 414+i*30, 55)
-                        button:SetScale(1)
-                    else
-                        button:SetAnchor(TOPLEFT, rowControl, TOPLEFT, 414+i*30, 45)
-                        button:SetScale(1.75)
-                    end
-                end
-            </OnInitialized>
         </TopLevelControl>
 
-
-        <Control name="WishListRow2" mouseEnabled="true" virtual="true">
+        <Control name="GearOverviewUIGearViewRow" mouseEnabled="true" virtual="true">
             <Dimensions y="30"/>
             <Controls>
-                <Label name="$(parent)Name" font="ZoFontGame" wrapMode="ELLIPSIS" horizontalAlignment="CENTER"
+                <Label name="$(parent)Name" font="ZoFontGame" wrapMode="ELLIPSIS" horizontalAlignment="RIGHT"
                        verticalAlignment="CENTER">
                     <Anchor point="LEFT"/>
-                    <Dimensions x="418" y="30"/>
-                    <OnLinkClicked>self:OnLinkClicked(...)</OnLinkClicked>
+                    <Dimensions x="250" y="30"/>
                 </Label>
             </Controls>
         </Control>

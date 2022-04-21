@@ -9,5 +9,6 @@
 GearOverview.lua
 GearOverviewPresets.lua
 GearOverviewUtils.lua
+GearOverviewControls.lua
 GearOverviewUI.lua
 GearOverview.xml

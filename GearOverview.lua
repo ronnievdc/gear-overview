@@ -35,8 +35,6 @@ lib.log = function(level, ...)
     end
 end
 
-SLASH_COMMANDS['/showgearlist'] = lib.showWindow
-
 -------------------------------------------------------------------------------------------------
 --  OnAddOnLoaded  --
 -------------------------------------------------------------------------------------------------
@@ -57,14 +55,16 @@ end
 ------ Fired when this addon is loaded
 ----- @return void
 function lib:Initialize()
-    lib.log(lib.LOG_LEVEL_DEBUG, lib.name .. ":Initialize")
     EVENT_MANAGER:UnregisterForEvent(lib.name, EVENT_ADD_ON_LOADED)
 
-    lib.scrollList = lib.CreateScrollList()
+    -- Register slash commands
+    SLASH_COMMANDS['/gear'] = lib.showWindow
+
+    -- Initialize settings
     lib.createSettings()
-    local fragment = ZO_SimpleSceneFragment:New(GearOverviewList)
-    lib.scene = ZO_Scene:New("GearOverviewList", SCENE_MANAGER)
-    lib.scene:AddFragment(fragment)
+
+    local scene = ZO_Scene:New("GearOverviewUI", SCENE_MANAGER)
+    scene:AddFragment(ZO_SimpleSceneFragment:New(GearOverviewUI))
 
     lib.scanSets()
 end
@@ -72,5 +72,4 @@ end
 -------------------------------------------------------------------------------------------------
 --  Register Events --
 -------------------------------------------------------------------------------------------------
-lib.log(lib.LOG_LEVEL_DEBUG, "register for event addon loaded")
 EVENT_MANAGER:RegisterForEvent(lib.name, EVENT_ADD_ON_LOADED, lib.OnAddOnLoaded)

@@ -142,56 +142,34 @@ function lib.parseSets(value)
 end
 
 function lib.takeScreenshot()
-    local myList = lib.getSetList()
-    if not myList then
-        return
-    end
-    lib.fetchItems()
-    lib.scrollList:Update(myList)
+    GearOverviewUIGearViewButtonScreenshot:SetHidden(true)
 
-    GearOverviewListButtonScreenshot:SetHidden(true)
-    GearOverviewListButtonCloseAddon:SetHidden(true)
-
-    --SCENE_MANAGER:HideScene(SCENE_MANAGER:GetScene("hud"))
-    --SCENE_MANAGER:HideScene(SCENE_MANAGER:GetScene("hudui"))
-    local currentScene = SCENE_MANAGER:GetCurrentSceneName()
-    --SCENE_MANAGER:SwapCurrentScene("GearOverviewListScene")
-    SCENE_MANAGER:Push("GearOverviewListScene")
-    SetFrameLocalPlayerInGameCamera(true)
-    SetFrameLocalPlayerTarget(0.15, 0.65)
-
-    local chatShown = CHAT_SYSTEM:IsHidden()
+    local chatHidden = CHAT_SYSTEM:IsHidden()
     local minbarShown = CHAT_SYSTEM.isMinimized
-    if not chatShown then
+    local buiPanelShown = BUI_Panel and not BUI_Panel:IsHidden()
+    if buiPanelShown then
+        BUI_Panel:SetHidden(true)
+    end
+    if not chatHidden then
         CHAT_SYSTEM:Minimize()
         CHAT_SYSTEM:HideMinBar()
-    end
-    if minbarShown then
+    elseif minbarShown then
         CHAT_SYSTEM:HideMinBar()
     end
-    --HUD_SCENE:SetState(SCENE_GROUP_HIDDEN)
-    zo_callLater(function()
-        --SetGuiHidden('ingame', true)
-        TakeScreenshot()
-        --GearOverview:Show()
-        zo_callLater(function()
 
-            --SCENE_MANAGER:SwapCurrentScene(currentScene)
-            SetFrameLocalPlayerTarget(0.5, 0.65)
-            SetFrameLocalPlayerInGameCamera(false)
-            SCENE_MANAGER:Push(currentScene)
-            if not chatShown then
-                CHAT_SYSTEM:Maximize()
+    zo_callLater(function()
+        TakeScreenshot()
+        zo_callLater(function()
+            if buiPanelShown then
+                BUI_Panel:SetHidden(false)
             end
-            if minbarShown then
+            if not chatHidden then
+                CHAT_SYSTEM:ShowMinBar()
+                CHAT_SYSTEM:Maximize()
+            elseif minbarShown then
                 CHAT_SYSTEM:ShowMinBar()
             end
-            GearOverviewListButtonScreenshot:SetHidden(false)
-            GearOverviewListButtonCloseAddon:SetHidden(false)
-            --SCENE_MANAGER:ShowScene(SCENE_MANAGER:GetScene("hud"))
-            --SCENE_MANAGER:ShowScene(SCENE_MANAGER:GetScene("hudui"))
+            GearOverviewUIGearViewButtonScreenshot:SetHidden(false)
         end, 1000)
-
     end, 1000)
-
 end
