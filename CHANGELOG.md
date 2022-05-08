@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.3.1 (2022-05-08)
+ - Moved LibAddonMenu-2.0 to optional dependencies
+
 ## 0.3.0 (2022-05-08)
  - Improved UI
  - Fixed screenshot button
