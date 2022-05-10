@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.3.2 (2022-05-10)
+ - Fixed error #1: LUA Error since update 
+
 ## 0.3.1 (2022-05-08)
  - Moved LibAddonMenu-2.0 to optional dependencies
 
