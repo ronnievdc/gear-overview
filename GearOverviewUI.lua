@@ -183,7 +183,7 @@ local function CreateOptions(parent, options)
             end
             frame = lib.UI.Control("$(parent)_Edit" .. i, parent, { w, height }, anchor)
             frame.label = lib.UI.Label("$(parent)_Label", frame, { labelWidth, height }, { TOPLEFT, TOPLEFT, 0, 0 }, font_bold, { .8, .8, .6, 1 }, { 0, 1 }, data.name)
-            frame.control = lib.UI.TextBox("$(parent)_EditBox", frame.label, { controlWidth, height }, { TOPLEFT, TOPRIGHT, 0, 0 }, 30, data.getFunc, data.setFunc, false, data.isMultiline)
+            frame.control = lib.UI.TextBox("$(parent)_EditBox", frame.label, { controlWidth, height }, { TOPLEFT, TOPRIGHT, 0, 0 }, 3000, data.getFunc, data.setFunc, false, data.isMultiline)
             anchor = { TOPLEFT, BOTTOMLEFT, 0, space, frame }
         end
         if frame then
