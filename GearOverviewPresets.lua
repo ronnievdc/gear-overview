@@ -18,11 +18,29 @@ lib.presets = {
 		{name="Perfected Stone-Talker's Oath", id=592},
 		{name="Saxhleel Champion", id=585},
 		{name="Perfected Saxhleel Champion", id=589},
+		{name="Z'en's Redress", id=455},
+		{name="Gossamer", id=261},
 
-		{name="Symphony of Blades (Monster Helm)", id=436},
-		{name="The Troll King (Monster Helm)", id=278},
-		{name="Encratis's Behemoth (Monster Helm)", id=577},
-		{name="Sentinel of Rkugamz (Monster Helm)", id=268},
+		-- Monster
+		{name="Symphony of Blades", id=436},
+		{name="The Troll King", id=278},
+		{name="Sentinel of Rkugamz", id=268},
+		{name="Encratis's Behemoth", id=577},
+		{name="Nazaray", id=633},
+		{name="Earthgore", id=341},
+		{name="Nightflame", id=167},
+
+		-- Arena
+		{name="Grand Rejuvenation", id=318},
+		{name="Perfected Grand Rejuvenation", id=533},
+		{name="Force Overflow", id=562},
+		{name="Perfected Force Overflow", id=568},
+		{name="Precise Regeneration", id=374},
+		{name="Perfected Precise Regeneration", id=527},
+		{name="Timeless Blessing", id=368},
+		{name="Perfected Timeless Blessing", id=362},
+		{name="Mender's Ward", id=416},
+		{name="Perfected Mender's Ward", id=428},
 
 		-- Mythic
         {name="Spaulder of Ruin", id=627, pieces=1},
@@ -64,17 +82,17 @@ lib.presets = {
 		{name="Perfected Rampaging Slash", id=523, pieces=5},
 
         -- Monster
-        {name="Earthgore (Monster Helm)", id=341},
-        {name="Sentinel of Rkugamz (Monster Helm)", id=268},
-        {name="Tremorscale (Monster Helm)", id=276},
-        {name="Engine Guardian (Monster Helm)", id=166},
-        {name="Stonekeepe (Monster Helm)", id=432},
-        {name="The Troll King (Monster Helm)", id=278},
-        {name="Symphony of Blades (Monster Helm)", id=436},
-		{name="Lord Warden (Monster Helm)", id=164},
-		{name="Thurvokun (Monster Helm)", id=349},
-		{name="Bloodspawn (Monster Helm)", id=163},
-		{name="Lady Thorn (Monster Helm)", id=535},
+        {name="Earthgore", id=341},
+        {name="Sentinel of Rkugamz", id=268},
+        {name="Tremorscale", id=276},
+        {name="Engine Guardian", id=166},
+        {name="Stonekeepe", id=432},
+        {name="The Troll King", id=278},
+        {name="Symphony of Blades", id=436},
+		{name="Lord Warden", id=164},
+		{name="Thurvokun", id=349},
+		{name="Bloodspawn", id=163},
+		{name="Lady Thorn", id=535},
 
 		-- Mythic
         {name="Spaulder of Ruin", id=627, pieces=1},
