@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.3 (2022-05-14)
+ - Increased the maximum amount of text in the "Custom list of sets" editbox from 30 to 3000
+ - Added extra sets for healers as preset
+
 ## 0.3.2 (2022-05-10)
  - Fixed error #1: LUA Error since update 
 
