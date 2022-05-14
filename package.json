@@ -1,0 +1,26 @@
+{
+  "name": "eso-gear-overview",
+  "version": "0.3.2",
+  "description": "Provides an interface to display what set items you have",
+  "main": "index.js",
+  "scripts": {
+    "zip": "node create_zip.js",
+    "postversion": "npm run zip"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ronnievdc/gear-overview.git"
+  },
+  "keywords": [
+    "eso"
+  ],
+  "author": "Ronnie van den Crommenacker",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ronnievdc/gear-overview/issues"
+  },
+  "homepage": "https://github.com/ronnievdc/gear-overview#readme",
+  "devDependencies": {
+    "jszip": "^3.9.1"
+  }
+}
