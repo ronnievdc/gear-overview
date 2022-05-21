@@ -36,6 +36,12 @@ function lib.trimString(s)
     return (string.gsub(s, "^%s*(.-)%s*$", "%1"))
 end
 
+function clearTable(t)
+    for i, v in ipairs(t) do
+        t[i] = nil
+    end
+end
+
 --- Scans all available sets in the game and creates a mapping from setName to setId
 function lib.scanSets()
     -- As of "Update 33 Ascending Tide DLC" there are 636 sets, scan till 700 to be future ready
@@ -125,14 +131,13 @@ end
 function lib.parseSets(value)
     if string.len(value) then
         lib.log(lib.LOG_LEVEL_INFO, "Parse custom sets")
-        lib.custom = true
-        lib.customList = {}
+        lib.setList = {}
         for setName in string.gmatch(value, "[^\n\r]+") do
             if string.len(setName) then
                 local setId = lib.setNameToId[string.lower(lib.trimString(setName))]
                 if setId then
                     lib.log(lib.LOG_LEVEL_INFO, "Set", setName, setId)
-                    table.insert(lib.customList, { name = GetItemSetName(itemSetId), id = setId })
+                    table.insert(lib.setList, { name = GetItemSetName(itemSetId), id = setId })
                 else
                     lib.log(lib.LOG_LEVEL_WARNING, "Unknown set", setName)
                 end

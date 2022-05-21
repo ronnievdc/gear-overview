@@ -81,13 +81,10 @@ local function SetupDataRow(rowControl, data, scrollList)
 end
 
 function lib.getSetList()
-    lib.log(lib.LOG_LEVEL_DEBUG, "lib.getSetList", lib.activePreset, lib.custom, table.concat(lib.customList, ', '))
-    if lib.activePreset then
-        return lib.presets[lib.activePreset]
-    elseif lib.custom then
-        return lib.customList
+    if not next(lib.setList) then
+        ZO_Alert(UI_ALERT_CATEGORY_ERROR, SOUNDS.NEGATIVE_CLICK, "|cff0000Please select a preset or enter custom sets!|r")
     end
-    ZO_Alert(UI_ALERT_CATEGORY_ERROR, SOUNDS.NEGATIVE_CLICK, "|cff0000Please select a valid list!|r")
+    return lib.setList
 end
 
 function lib.refreshGearList()
@@ -198,6 +195,21 @@ function lib.createSettings()
     createLAMSettings()
 end
 
+function setPreset(value)
+    if value == NO_PRESET then
+        lib.activePreset = nil
+    else
+        lib.activePreset = value
+        local preset = lib.presets[value]
+        local editboxText = ''
+        lib.setList = preset
+        for _i, row in pairs(preset) do
+            editboxText = editboxText .. GetItemSetName(row.id) .. '\n'
+        end
+        GearOverviewUISettingsView_Edit3_Label_EditBox.eb:SetText(editboxText)
+    end
+end
+
 function createSettingsTab()
     local NO_PRESET = "No preset"
     local presets = lib.getTableKeys(lib.presets)
@@ -213,11 +225,7 @@ function createSettingsTab()
                 return NO_PRESET
             end,
             setFunc = function(i, value)
-                if value == NO_PRESET then
-                    lib.activePreset = nil
-                else
-                    lib.activePreset = value
-                end
+                setPreset(value)
             end,
             disabled = function()
                 return false
@@ -246,6 +254,7 @@ function createSettingsTab()
                 return ''
             end,
             setFunc = function(text)
+                lib.activePreset = nil
                 lib.parseSets(text)
             end,
             disabled = function()
