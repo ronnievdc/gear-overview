@@ -12,3 +12,4 @@ GearOverviewUtils.lua
 GearOverviewControls.lua
 GearOverviewUI.lua
 GearOverview.xml
+bindings.xml

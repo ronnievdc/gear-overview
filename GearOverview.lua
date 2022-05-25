@@ -66,6 +66,8 @@ function lib:Initialize()
     scene:AddFragment(ZO_SimpleSceneFragment:New(GearOverviewUI))
 
     lib.scanSets()
+
+    ZO_CreateStringId("SI_BINDING_NAME_OPEN_GEAR_OVERVIEW", "Show window")
 end
 
 -------------------------------------------------------------------------------------------------
