@@ -37,12 +37,14 @@ local function SetupDataRow(rowControl, data, scrollList)
         local isAvailable = false
 
         for idx = 1, GetNumItemSetCollectionPieces(itemSetId) do
-            pieceId, _ = GetItemSetCollectionPieceInfo(itemSetId, idx)
+            local pieceId, _ = GetItemSetCollectionPieceInfo(itemSetId, idx)
             local itemLink = GetItemSetCollectionPieceItemLink(pieceId, LINK_STYLE_DEFAULT, ITEM_TRAIT_TYPE_NONE, nil)
             local orderNumber = lib.getOrderNumber(itemLink)
 
             if i == orderNumber then
-                isUnlocked = IsItemSetCollectionPieceUnlocked(pieceId)
+                if not isUnlocked then
+                    isUnlocked = IsItemSetCollectionPieceUnlocked(pieceId)
+                end
                 isAvailable = true
             end
         end
