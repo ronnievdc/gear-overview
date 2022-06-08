@@ -1,5 +1,5 @@
 ## Title: Gear Overview
-## APIVersion: 101032 101033
+## APIVersion: 101033 101034
 ## Version: 0.3.3
 ## Description: A tool to track gear sets for submitting for discord roles
 ## Author: @ronnievdc
