@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.4.1 (2022-07-11)
+ - Added Pillager's Profit and Pearlescent Ward to presets
+
 ## 0.4.0 (2022-06-08)
  - Official support for the High Isle chapter
  - Added a keybinding option
