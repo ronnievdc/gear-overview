@@ -20,6 +20,8 @@ lib.presets = {
 		{name="Perfected Saxhleel Champion", id=589},
 		{name="Z'en's Redress", id=455},
 		{name="Gossamer", id=261},
+		{name="Pillager's Profit", id=649},
+		{name="Perfected Pillager's Profit", id=650},
 
 		-- Monster
 		{name="Symphony of Blades", id=436},
@@ -67,6 +69,8 @@ lib.presets = {
         {name="Nazaray (Monster Helm)", id=633},
 
 		-- Optional
+		{name="Pearlescent Ward", id=648},
+		{name="Perfected Pearlescent Ward", id=651},
 		{name="Aegis of Galenwe", id=388},
 		{name="Perfected Aegis of Galenwe", id=392},
 		{name="Dragon's Defilement", id=457},

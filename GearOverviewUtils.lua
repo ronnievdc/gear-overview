@@ -44,7 +44,7 @@ end
 
 --- Scans all available sets in the game and creates a mapping from setName to setId
 function lib.scanSets()
-    -- As of "Update 33 Ascending Tide DLC" there are 636 sets, scan till 700 to be future ready
+    -- As of "Update 34 High Isle" there are 658 sets, scan till 700 to be future ready
     for itemSetId = 1, 700, 1 do
         local setName = GetItemSetName(itemSetId)
         if setName then
