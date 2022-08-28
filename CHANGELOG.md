@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.5.0 (2022-08-28)
+ - Official support the Lost Depths DLC
+
 ## 0.4.1 (2022-07-11)
  - Added Pillager's Profit and Pearlescent Ward to presets
 
