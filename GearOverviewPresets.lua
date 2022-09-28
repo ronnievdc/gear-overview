@@ -9,6 +9,7 @@ lib.presets = {
 		{name="Perfected Roaring Opportunist", id=497},
 		{name="Jorvuld's Guidance", id=346},
 
+		{name="Powerful Assault", id=180},
 		{name="The Worm's Raiment", id=124},
 		{name="Vestment of Olorime", id=391},
 		{name="Perfected Vestment of Olorime", id=395},

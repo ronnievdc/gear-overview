@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.5.1 (2022-09-28)
+ - Added Powerful Assault to Healer presets
+
 ## 0.5.0 (2022-08-28)
  - Official support the Lost Depths DLC
 
