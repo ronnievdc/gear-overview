@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.6.0 (2023-04-06)
+ - Official support for Update 37 Scribes of Fate
+ - Added "Archdruid Devyric" monster set for Tanks
+ - Fixed bug "bad argument #1 to 'pairs' (table/struct expected, got nil)" when switching back to "No Preset"
+
 ## 0.5.1 (2022-09-28)
  - Added Powerful Assault to Healer presets
 
