@@ -17,7 +17,7 @@ local function SetupDataRow(rowControl, data, scrollList)
     local itemSetName = GetItemSetName(itemSetId)
     local skipOrderNumbers = {}
 
-    lib.log(lib.LOG_LEVEL_INFO, "localStorage.displayWeapons", localStorage.displayWeapons)
+    lib.log(lib.LOG_LEVEL_VERBOSE, "SetupDataRow with displayWeapons", localStorage.displayWeapons)
     if localStorage.displayWeapons == "WEAPONS_TANK" then
         skipOrderNumbers = { 10, 14, 15, 16, 17, 18, 19, 21 }
     elseif localStorage.displayWeapons == "WEAPONS_HEALER" then
