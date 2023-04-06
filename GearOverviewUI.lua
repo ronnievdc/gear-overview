@@ -6,6 +6,8 @@ local localStorage = {
     displayWeapons = "WEAPONS_ALL"
 }
 
+local NO_PRESET = "No preset"
+
 --- Callback function to render on set
 --- @param rowControl
 --- @param data table
@@ -213,7 +215,6 @@ function setPreset(value)
 end
 
 function createSettingsTab()
-    local NO_PRESET = "No preset"
     local presets = lib.getTableKeys(lib.presets)
     table.insert(presets, 1, NO_PRESET)
 
