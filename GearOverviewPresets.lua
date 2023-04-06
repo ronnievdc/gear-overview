@@ -46,8 +46,8 @@ lib.presets = {
 		{name="Perfected Mender's Ward", id=428},
 
 		-- Mythic
-        {name="Spaulder of Ruin", id=627, pieces=1},
-        {name="Pearls of Ehlnofey", id=576, pieces=1},
+        {name="Spaulder of Ruin", id=627},
+        {name="Pearls of Ehlnofey", id=576},
 	},
 	["PugESO Tanks"] = {
 	    -- Required
@@ -62,8 +62,8 @@ lib.presets = {
 		{name="Elemental Catalyst", id=516},
 
 		-- Arena
-        {name="Puncturing Remedy", id=314, pieces=5},
-		{name="Perfected Puncturing Remedy", id=529, pieces=5},
+        {name="Puncturing Remedy", id=314},
+		{name="Perfected Puncturing Remedy", id=529},
 
         -- Monster
         {name="Encratis's Behemoth (Monster Helm)", id=577},
@@ -83,8 +83,8 @@ lib.presets = {
         {name="Perfected Vestment of Olorime", id=395},
 
         -- Arena
-        {name="Rampaging Slash", id=370, pieces=5},
-		{name="Perfected Rampaging Slash", id=523, pieces=5},
+        {name="Rampaging Slash", id=370},
+		{name="Perfected Rampaging Slash", id=523},
 
         -- Monster
         {name="Earthgore", id=341},
@@ -98,10 +98,11 @@ lib.presets = {
 		{name="Thurvokun", id=349},
 		{name="Bloodspawn", id=163},
 		{name="Lady Thorn", id=535},
+		{name="Archdruid Devyric", id=666},
 
 		-- Mythic
-        {name="Spaulder of Ruin", id=627, pieces=1},
-        {name="Pearls of Ehlnofey", id=576, pieces=1},
+        {name="Spaulder of Ruin", id=627},
+        {name="Pearls of Ehlnofey", id=576},
         {name="Ring of the Wild Hunt", id=503},
         {name="Death Dealer's Fete", id=596},
         {name="Torc of Tonal Constancy", id=505},
