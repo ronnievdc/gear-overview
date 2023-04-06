@@ -44,11 +44,12 @@ end
 
 --- Scans all available sets in the game and creates a mapping from setName to setId
 function lib.scanSets()
-    -- As of "Update 34 High Isle" there are 658 sets, scan till 700 to be future ready
-    for itemSetId = 1, 700, 1 do
+    -- As of "Update 37 Scribes of Fate" there are 690 sets, scan till 750 to be future ready
+    for itemSetId = 1, 750, 1 do
         local setName = GetItemSetName(itemSetId)
-        if setName then
+        if string.len(setName) > 0 then
             lib.setNameToId[string.lower(setName)] = itemSetId
+            lib.debug(lib, tostring(itemSetId), setName)
         end
     end
 end
