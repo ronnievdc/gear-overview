@@ -203,8 +203,9 @@ function setPreset(value)
     if value == NO_PRESET then
         lib.activePreset = nil
     else
+        local _presets = lib.getApplicablePresets()
         lib.activePreset = value
-        local preset = lib.presets[value]
+        local preset = _presets[value]
         local editboxText = ''
         lib.setList = preset
         for _i, row in pairs(preset) do
@@ -215,7 +216,9 @@ function setPreset(value)
 end
 
 function createSettingsTab()
-    local presets = lib.getTableKeys(lib.presets)
+    local _presets = lib.getApplicablePresets()
+
+    local presets = lib.getTableKeys(_presets)
     table.insert(presets, 1, NO_PRESET)
 
     local Options = {

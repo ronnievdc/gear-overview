@@ -36,10 +36,18 @@ function lib.trimString(s)
     return (string.gsub(s, "^%s*(.-)%s*$", "%1"))
 end
 
-function clearTable(t)
-    for i, v in ipairs(t) do
-        t[i] = nil
+local function shallowcopy(orig)
+    local orig_type = type(orig)
+    local copy
+    if orig_type == 'table' then
+        copy = {}
+        for orig_key, orig_value in pairs(orig) do
+            copy[orig_key] = orig_value
+        end
+    else -- number, string, boolean, etc
+        copy = orig
     end
+    return copy
 end
 
 --- Scans all available sets in the game and creates a mapping from setName to setId
@@ -178,4 +186,39 @@ function lib.takeScreenshot()
             GearOverviewUIGearViewButtonScreenshot:SetHidden(false)
         end, 1000)
     end, 1000)
+end
+
+function lib.getGuildIds()
+    local guildIds = {}
+    for guildIndex = 1, GetNumGuilds(), 1 do
+        lib.debug("Found guild", guildIndex, GetGuildName(GetGuildId(guildIndex)))
+        guildIds[guildIndex] = GetGuildId(guildIndex)
+    end
+    lib.debug("guildIds", guildIds)
+    return guildIds
+end
+
+function lib.getGuildPresets()
+    local guildIds = lib.getGuildIds()
+    local presets = {}
+    for _, guildId in pairs(guildIds) do
+        local guildPresets = lib.guildPresets[guildId]
+        if (guildPresets ~= nil) then
+            lib.debug("Preset", guildId, GetGuildName(guildId), lib.getTableKeys(guildPresets))
+            lib.debug(lib.getTableKeys(guildPresets))
+            for presetName, presetItems in pairs(guildPresets) do
+                presets[GetGuildName(guildId) .. ": " .. presetName] = presetItems
+            end
+        end
+    end
+    return presets
+end
+
+function lib.getApplicablePresets()
+    local presets = shallowcopy(lib.presets)
+    local guildPresets = lib.getGuildPresets()
+    for k, v in pairs(guildPresets) do
+        presets[k] = v
+    end
+    return presets
 end
