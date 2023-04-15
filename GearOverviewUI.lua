@@ -6,6 +6,12 @@ local localStorage = {
     displayWeapons = "WEAPONS_ALL"
 }
 
+local weaponTypeChoices = {
+	["WEAPONS_ALL"] = "All",
+	["WEAPONS_TANK"] = "Tank (S&B, Ice staff)",
+	["WEAPONS_HEALER"] = "Healer (All staffs)",
+}
+
 local NO_PRESET = "No preset"
 
 --- Callback function to render on set
@@ -123,7 +129,7 @@ function lib.showWindow()
     zo_callLater(function()
         -- Register for changes to hide the window
         EVENT_MANAGER:RegisterForEvent(lib.name, EVENT_GAME_CAMERA_UI_MODE_CHANGED, lib.onWindowClose)
-    end,10)
+    end, 10)
 end
 
 function lib.onWindowClose()
@@ -203,12 +209,25 @@ function setPreset(value)
     if value == NO_PRESET then
         lib.activePreset = nil
     else
-        local _presets = lib.getApplicablePresets()
         lib.activePreset = value
-        local preset = _presets[value]
+        local preset = lib.getPresetByName(value)
+
+        local weaponsDrop = GearOverviewUISettingsView_Drop2.control
+		local weaponsDropIndex = 1
+		for index, iValue in pairs(lib.getTableKeys(weaponTypeChoices)) do
+			if (iValue == preset.displayWeapons) then
+				weaponsDropIndex = index
+			end
+		end
+		lib.debug("SelectItemByIndex", weaponsDropIndex, preset.displayWeapons, value)
+		weaponsDrop.m_comboBox:SelectItemByIndex(weaponsDropIndex, true)
+		weaponsDrop.value = weaponsDropIndex
+		weaponsDrop:UpdateParent()
+		localStorage.displayWeapons = preset.displayWeapons
+
+		lib.setList = preset.sets
         local editboxText = ''
-        lib.setList = preset
-        for _i, row in pairs(preset) do
+        for _, row in pairs(preset.sets) do
             editboxText = editboxText .. GetItemSetName(row.id) .. '\n'
         end
         GearOverviewUISettingsView_Edit3_Label_EditBox.eb:SetText(editboxText)
@@ -216,17 +235,23 @@ function setPreset(value)
 end
 
 function createSettingsTab()
-    local _presets = lib.getApplicablePresets()
+    local presetNames = {}
+    table.insert(presetNames, NO_PRESET)
+    for _, preset in pairs(lib.applicablePresets) do
+        table.insert(presetNames, preset.name)
+    end
 
-    local presets = lib.getTableKeys(_presets)
-    table.insert(presets, 1, NO_PRESET)
+	local weaponTypeLabels = {}
+	for _, label in pairs(weaponTypeChoices) do
+		table.insert(weaponTypeLabels, label)
+	end
 
     local Options = {
         {
             type = "dropdown",
             name = "Set Preset",
             tooltip = "Which gear preset should be displayed.",
-            choices = presets,
+            choices = presetNames,
             getFunc = function()
                 return NO_PRESET
             end,
@@ -240,13 +265,12 @@ function createSettingsTab()
             type = "dropdown",
             name = "Weapon types",
             tooltip = "Click here to show the window.",
-            choices = { "All", "Tank (S&B, Ice staff)", "Header (All staffs)" },
+            choices = weaponTypeLabels,
             getFunc = function()
-                return "All"
+                return weaponTypeChoices["WEAPONS_ALL"]
             end,
             setFunc = function(i, value)
-                local choicesValues = { "WEAPONS_ALL", "WEAPONS_TANK", "WEAPONS_HEALER" }
-                localStorage.displayWeapons = choicesValues[i]
+                localStorage.displayWeapons = lib.getTableKeys(weaponTypeChoices)[i]
             end,
             disabled = function()
                 return false

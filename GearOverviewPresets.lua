@@ -77,104 +77,129 @@ local Pearls = { name = "Pearls of Ehlnofey", id = 576 }
 local WildHunt = { name = "Ring of the Wild Hunt", id = 503 }
 local DeathDealersFete = { name = "Death Dealer's Fete", id = 596 }
 local TonalConstancy = { name = "Torc of Tonal Constancy", id = 505 }
-
+-- WEAPONS_TANK
 lib.presets = {
-	["Healer Common"] = {
-		-- Full sets
-		Gossamer, Hollowfang, JO, RO, ROPerf, MasterArchitect, Olorime, OlorimePerf, PowerfulAssault, Sax, SaxPerf,
-		Pillagers, PillagersPerf, SPC, StoneTalker, StoneTalkerPerf, MK, Worms, Zen,
-		-- Monster
-		Symphony, TrollKing, Rkugamz, Encratis, Naz, Earthgore, Nightflame,
-		-- Arena
-		RESTO_GrandRejuv, RESTO_GrandRejuvPerf, RESTO_ForceOverFlow, RESTO_ForceOverFlowPerf,
-		RESTO_PreciseRegen, RESTO_PreciseRegenPerf, RESTO_TimelessBlessing, RESTO_TimelessBlessingPerf,
-		RESTO_BRP, RESTO_BRPPerf,
-		-- Mythic
-		Spaulder, Pearls,
+	{
+		name = "Tank Recommended",
+		displayWeapons = "WEAPONS_TANK",
+		sets = {
+			-- Full sets
+			Yolna, YolnaPerf, Sax, SaxPerf, Crimson, TT, PowerfulAssault, PearlescentWard, PearlescentWardPerf,
+			-- Monster
+			Archdruid, Earthgore, Encratis, EngineGuardian, LadyThorn, Naz, Tremor, SB_VoidBash, SB_VoidBashPerf,
+			-- Arena
+			SB_Masters, SB_MastersPerf, SB_Maelstrom, SB_MaelstromPerf,
+			-- Mythic
+			Spaulder,
+		},
 	},
-	["Healer Recommended"] = {
-		-- Full sets
-		Hollowfang, JO, RO, ROPerf, MasterArchitect, Olorime, OlorimePerf, PowerfulAssault, Sax, SaxPerf,
-		Pillagers, PillagersPerf, SPC, StoneTalker, StoneTalkerPerf, MK,
-		-- Monster
-		Symphony, TrollKing, Rkugamz, Naz, Earthgore, Nightflame,
-		-- Arena
-		RESTO_GrandRejuv, RESTO_GrandRejuvPerf, RESTO_BRP, RESTO_BRPPerf, RESTO_PreciseRegen, RESTO_PreciseRegenPerf,
-		-- Mythic
-		Spaulder, Pearls,
+	{
+		name = "Tank Extensive",
+		displayWeapons = "WEAPONS_TANK",
+		sets = {
+			-- Full sets
+			Yolna, YolnaPerf, Sax, SaxPerf, Crimson, TT, PowerfulAssault, Worms, EC, PearlescentWard, PearlescentWardPerf,
+			Galenwe, GalenwePerf, DragonDefile, Alkosh, FrozenWatcher, WarMachine, MasterArchitect, Olorime, OlorimePerf,
+			-- Monster
+			Encratis, Naz, Earthgore, Rkugamz, Tremor, EngineGuardian, Stonekeeper, TrollKing, Symphony,
+			LordWarden, Thurvokun, Bloodspawn, LadyThorn, Archdruid,
+			-- Arena
+			SB_Masters, SB_MastersPerf, SB_Maelstrom, SB_MaelstromPerf, SB_VoidBash, SB_VoidBashPerf,
+			-- Mythic
+			Spaulder, Pearls, WildHunt, DeathDealersFete, TonalConstancy,
+		},
 	},
-	["Tank Common"] = {
-		-- Full sets
-		Yolna, YolnaPerf, Sax, SaxPerf, Crimson, TT, PowerfulAssault, Worms, EC, PearlescentWard, PearlescentWardPerf,
-		Galenwe, GalenwePerf, DragonDefile, Alkosh, FrozenWatcher, WarMachine, MasterArchitect, Olorime, OlorimePerf,
-		-- Monster
-		Encratis, Naz, Earthgore, Rkugamz, Tremor, EngineGuardian, Stonekeeper, TrollKing, Symphony,
-		LordWarden, Thurvokun, Bloodspawn, LadyThorn, Archdruid,
-		-- Arena
-		SB_Masters, SB_MastersPerf, SB_Maelstrom, SB_MaelstromPerf, SB_VoidBash, SB_VoidBashPerf,
-		-- Mythic
-		Spaulder, Pearls, WildHunt, DeathDealersFete, TonalConstancy,
+	{
+		name = "Healer Recommended",
+		displayWeapons = "WEAPONS_HEALER",
+		sets = {
+			-- Full sets
+			Hollowfang, JO, RO, ROPerf, MasterArchitect, Olorime, OlorimePerf, PowerfulAssault, Sax, SaxPerf,
+			Pillagers, PillagersPerf, SPC, StoneTalker, StoneTalkerPerf, MK,
+			-- Monster
+			Symphony, TrollKing, Rkugamz, Naz, Earthgore, Nightflame,
+			-- Arena
+			RESTO_GrandRejuv, RESTO_GrandRejuvPerf, RESTO_BRP, RESTO_BRPPerf, RESTO_PreciseRegen, RESTO_PreciseRegenPerf,
+			-- Mythic
+			Spaulder, Pearls,
+		},
 	},
-	["Tank Recommended"] = {
-		-- Full sets
-		Yolna, YolnaPerf, Sax, SaxPerf, Crimson, TT, PowerfulAssault, PearlescentWard, PearlescentWardPerf,
-		-- Monster
-		Archdruid, Earthgore, Encratis, EngineGuardian, LadyThorn, Naz, Tremor, SB_VoidBash, SB_VoidBashPerf,
-		-- Arena
-		SB_Masters, SB_MastersPerf, SB_Maelstrom, SB_MaelstromPerf,
-		-- Mythic
-		Spaulder,
+	{
+		name = "Healer Extensive",
+		displayWeapons = "WEAPONS_HEALER",
+		sets = {
+			-- Full sets
+			Gossamer, Hollowfang, JO, RO, ROPerf, MasterArchitect, Olorime, OlorimePerf, PowerfulAssault, Sax, SaxPerf,
+			Pillagers, PillagersPerf, SPC, StoneTalker, StoneTalkerPerf, MK, Worms, Zen,
+			-- Monster
+			Symphony, TrollKing, Rkugamz, Encratis, Naz, Earthgore, Nightflame,
+			-- Arena
+			RESTO_GrandRejuv, RESTO_GrandRejuvPerf, RESTO_ForceOverFlow, RESTO_ForceOverFlowPerf,
+			RESTO_PreciseRegen, RESTO_PreciseRegenPerf, RESTO_TimelessBlessing, RESTO_TimelessBlessingPerf,
+			RESTO_BRP, RESTO_BRPPerf,
+			-- Mythic
+			Spaulder, Pearls,
+		},
 	},
 }
 
 local roseTankSets = {
-	Yolna, YolnaPerf, Crimson, TT, Sax, SaxPerf, PowerfulAssault, PearlescentWard, PearlescentWardPerf,
-	-- Monster
-	Archdruid, Naz, Tremor,
-	-- Areana
-	SB_Masters, SB_MastersPerf,
-	-- Mythic
-	Spaulder
+	name = "Tank",
+	displayWeapons = "WEAPONS_TANK",
+	sets = {
+		Yolna, YolnaPerf, Crimson, TT, Sax, SaxPerf, PowerfulAssault, PearlescentWard, PearlescentWardPerf,
+		-- Monster
+		Archdruid, Naz, Tremor,
+		-- Areana
+		SB_Masters, SB_MastersPerf,
+		-- Mythic
+		Spaulder,
+
+	},
 }
 
 local roseHealerSets = {
-	SPC, Olorime, OlorimePerf, Sax, SaxPerf, PowerfulAssault, MK, RO, ROPerf, JO,
-	-- Arena
-	RESTO_GrandRejuv, RESTO_GrandRejuvPerf, RESTO_BRP, RESTO_BRPPerf,
-	-- Monster
-	Symphony, Naz,
-	-- Mythic
-	Spaulder, Pearls
+	name = "Healer",
+	displayWeapons = "WEAPONS_HEALER",
+	sets = {
+		SPC, Olorime, OlorimePerf, Sax, SaxPerf, PowerfulAssault, MK, RO, ROPerf, JO,
+		-- Arena
+		RESTO_GrandRejuv, RESTO_GrandRejuvPerf, RESTO_BRP, RESTO_BRPPerf,
+		-- Monster
+		Symphony, Naz,
+		-- Mythic
+		Spaulder, Pearls
+	},
 }
 
 lib.guildPresets = {}
 
 -- Autumn Rose
 lib.guildPresets[553666] = {
-	["Tank"] = roseTankSets,
-	["Healer"] = roseHealerSets,
+	roseTankSets,
+	roseHealerSets,
 }
 
 -- Spring Rose
 lib.guildPresets[496448] = {
-	["Tank"] = roseTankSets,
-	["Healer"] = roseHealerSets,
+	roseTankSets,
+	roseHealerSets,
 }
 
 -- Winter Rose
 lib.guildPresets[422980] = {
-	["Tank"] = roseTankSets,
-	["Healer"] = roseHealerSets,
+	roseTankSets,
+	roseHealerSets,
 }
 
 -- Summer Rose
 lib.guildPresets[569338] = {
-	["Tank"] = roseTankSets,
-	["Healer"] = roseHealerSets,
+	roseTankSets,
+	roseHealerSets,
 }
 
 -- Midnight Rose
 lib.guildPresets[586676] = {
-	["Tank"] = roseTankSets,
-	["Healer"] = roseHealerSets,
+	roseTankSets,
+	roseHealerSets,
 }

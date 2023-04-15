@@ -57,7 +57,7 @@ function lib.scanSets()
         local setName = GetItemSetName(itemSetId)
         if string.len(setName) > 0 then
             lib.setNameToId[string.lower(setName)] = itemSetId
-            lib.debug(lib, tostring(itemSetId), setName)
+            -- lib.debug(tostring(itemSetId), setName)
         end
     end
 end
@@ -194,7 +194,6 @@ function lib.getGuildIds()
         lib.debug("Found guild", guildIndex, GetGuildName(GetGuildId(guildIndex)))
         guildIds[guildIndex] = GetGuildId(guildIndex)
     end
-    lib.debug("guildIds", guildIds)
     return guildIds
 end
 
@@ -204,10 +203,14 @@ function lib.getGuildPresets()
     for _, guildId in pairs(guildIds) do
         local guildPresets = lib.guildPresets[guildId]
         if (guildPresets ~= nil) then
-            lib.debug("Preset", guildId, GetGuildName(guildId), lib.getTableKeys(guildPresets))
-            lib.debug(lib.getTableKeys(guildPresets))
-            for presetName, presetItems in pairs(guildPresets) do
-                presets[GetGuildName(guildId) .. ": " .. presetName] = presetItems
+            lib.debug("Found guild preset", guildId, GetGuildName(guildId), "with", #guildPresets, "sets")
+            for _, preset in pairs(guildPresets) do
+                local guildPreset = {
+                    name = GetGuildName(guildId) .. ": " .. preset.name,
+                    displayWeapons = preset.displayWeapons,
+                    sets = preset.sets,
+                }
+                table.insert(presets, guildPreset)
             end
         end
     end
@@ -215,10 +218,23 @@ function lib.getGuildPresets()
 end
 
 function lib.getApplicablePresets()
-    local presets = shallowcopy(lib.presets)
+    local presets = {}
     local guildPresets = lib.getGuildPresets()
-    for k, v in pairs(guildPresets) do
-        presets[k] = v
+    for _, v in pairs(guildPresets) do
+        table.insert(presets, v)
     end
+    for _, v in pairs(lib.presets) do
+        table.insert(presets, v)
+    end
+    lib.debug("Found", #presets, "applicable presets")
     return presets
+end
+
+function lib.getPresetByName(name)
+    for _, preset in pairs(lib.applicablePresets) do
+        if (preset.name == name) then
+            return preset
+        end
+    end
+    return nil
 end

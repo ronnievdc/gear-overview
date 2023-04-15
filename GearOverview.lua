@@ -6,6 +6,7 @@ lib.author = "@ronnievdc"
 lib.version = "0.5.1"
 lib.setList = {}
 lib.presets = {}
+lib.applicablePresets = nil
 lib.activePreset = nil
 lib.bag = {}
 lib.setNameToId = {}
@@ -62,6 +63,8 @@ function lib:Initialize()
 
     -- Register slash commands
     SLASH_COMMANDS['/gear'] = lib.showWindow
+
+    lib.applicablePresets = lib.getApplicablePresets()
 
     -- Initialize settings
     lib.createSettings()
