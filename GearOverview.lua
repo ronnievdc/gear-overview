@@ -46,7 +46,7 @@ end
 --- @param event table
 --- @param addonName string The name of the loaded addon
 --- @return void
-function lib.OnAddOnLoaded(event, addonName)
+function lib.OnAddOnLoaded(_, addonName)
     if addonName ~= lib.name then
         return
     end

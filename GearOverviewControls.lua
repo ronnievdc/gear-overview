@@ -87,7 +87,7 @@ function lib.UI.Button(name, parent, dims, anchor, state, font, align, normal, p
     end
 
     --Apply properties
-    local button = Chain(button)
+    button = Chain(button)
             :SetDimensions(dims[1], dims[2])
             :ClearAnchors()
             :SetAnchor(anchor[1], #anchor == 5 and anchor[5] or parent, anchor[2], anchor[3], anchor[4])
@@ -130,11 +130,11 @@ function lib.UI.ComboBox(name, parent, dims, anchor, array, val, fun, hidden, sc
         control.m_comboBox:SetHeight(math.min(control.m_comboBox:GetEntryTemplateHeightWithSpacing() * #array - control.m_comboBox.m_spacing + ZO_SCROLLABLE_COMBO_BOX_LIST_PADDING_Y * 2, 400))
     end
     --Set values
-    control.UpdateValues = function(self, array, index)
+    control.UpdateValues = function(self, valuesArray, index)
         local comboBox = self.m_comboBox
-        if array then
+        if valuesArray then
             comboBox:ClearItems()
-            for i, v in pairs(array) do
+            for i, v in pairs(valuesArray) do
                 local entry = ZO_ComboBox:CreateItemEntry(v, function()
                     control.value = i
                     fun(i, v)

@@ -36,20 +36,6 @@ function lib.trimString(s)
     return (string.gsub(s, "^%s*(.-)%s*$", "%1"))
 end
 
-local function shallowcopy(orig)
-    local orig_type = type(orig)
-    local copy
-    if orig_type == 'table' then
-        copy = {}
-        for orig_key, orig_value in pairs(orig) do
-            copy[orig_key] = orig_value
-        end
-    else -- number, string, boolean, etc
-        copy = orig
-    end
-    return copy
-end
-
 --- Scans all available sets in the game and creates a mapping from setName to setId
 function lib.scanSets()
     -- As of "Update 37 Scribes of Fate" there are 690 sets, scan till 750 to be future ready
@@ -92,7 +78,7 @@ end
 function lib.getTableKeys(table)
     local keys = {}
     local n = 0
-    for k, v in pairs(table) do
+    for k, _ in pairs(table) do
         n = n + 1
         keys[n] = k
     end
@@ -146,7 +132,7 @@ function lib.parseSets(value)
                 local setId = lib.setNameToId[string.lower(lib.trimString(setName))]
                 if setId then
                     lib.log(lib.LOG_LEVEL_INFO, "Set", setName, setId)
-                    table.insert(lib.setList, { name = GetItemSetName(itemSetId), id = setId })
+                    table.insert(lib.setList, { name = GetItemSetName(setId), id = setId })
                 else
                     lib.log(lib.LOG_LEVEL_WARNING, "Unknown set", setName)
                 end
@@ -191,8 +177,9 @@ end
 function lib.getGuildIds()
     local guildIds = {}
     for guildIndex = 1, GetNumGuilds(), 1 do
-        lib.debug("Found guild", guildIndex, GetGuildName(GetGuildId(guildIndex)))
-        guildIds[guildIndex] = GetGuildId(guildIndex)
+        local guildId = GetGuildId(guildIndex)
+        lib.debug("Found guild", guildIndex, GetGuildName(guildId))
+        guildIds[guildIndex] = guildId
     end
     return guildIds
 end

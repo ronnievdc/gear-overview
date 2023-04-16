@@ -18,7 +18,7 @@ local NO_PRESET = "No preset"
 --- @param rowControl
 --- @param data table
 --- @param scrollList
-local function SetupDataRow(rowControl, data, scrollList)
+local function SetupDataRow(rowControl, data, _)
     local itemSetId = data.id
     local itemSetName = GetItemSetName(itemSetId)
     local skipOrderNumbers = {}
@@ -57,7 +57,7 @@ local function SetupDataRow(rowControl, data, scrollList)
             end
         end
 
-        local bagItem = nil
+        local bagItem
         if lib.bag[itemSetId] then
             bagItem = lib.bag[itemSetId][i]
         end
@@ -170,7 +170,7 @@ local function CreateOptions(parent, options)
         local frame
         if data.type == "button" then
             frame = lib.UI.Control("$(parent)_Frame" .. i, parent, { w, h }, anchor)
-            button = WINDOW_MANAGER:CreateControlFromVirtual(data.reference or "$(parent)_Button", frame, "ZO_DefaultButton")
+            local button = WINDOW_MANAGER:CreateControlFromVirtual(data.reference or "$(parent)_Button", frame, "ZO_DefaultButton")
             button:SetWidth(180, 28)
             button:SetFont("ZoFontGameLargeBold")
             button:SetText(data.name)
@@ -199,42 +199,44 @@ local function CreateOptions(parent, options)
     end
 end
 
-function lib.createSettings()
-    createSettingsTab()
-    lib.scrollList = createScrollList()
-    createLAMSettings()
+local function updateWeaponsChoiceDrop(displayWeapons)
+    local weaponsDrop = GearOverviewUISettingsView_Drop2.control
+		local weaponsDropIndex = 1
+		for index, iValue in pairs(lib.getTableKeys(weaponTypeChoices)) do
+			if (iValue == displayWeapons) then
+				weaponsDropIndex = index
+			end
+		end
+		lib.debug("SelectItemByIndex", weaponsDropIndex, displayWeapons, lib.activePreset)
+		weaponsDrop.m_comboBox:SelectItemByIndex(weaponsDropIndex, true)
+		weaponsDrop.value = weaponsDropIndex
+		weaponsDrop:UpdateParent()
+		localStorage.displayWeapons = displayWeapons
 end
 
-function setPreset(value)
+local function pasteSetsToEditbox(sets)
+    local editboxText = ''
+    for _, row in pairs(sets) do
+        editboxText = editboxText .. GetItemSetName(row.id) .. '\n'
+    end
+    GearOverviewUISettingsView_Edit3_Label_EditBox.eb:SetText(editboxText)
+end
+
+local function setPreset(value)
     if value == NO_PRESET then
         lib.activePreset = nil
     else
         lib.activePreset = value
         local preset = lib.getPresetByName(value)
 
-        local weaponsDrop = GearOverviewUISettingsView_Drop2.control
-		local weaponsDropIndex = 1
-		for index, iValue in pairs(lib.getTableKeys(weaponTypeChoices)) do
-			if (iValue == preset.displayWeapons) then
-				weaponsDropIndex = index
-			end
-		end
-		lib.debug("SelectItemByIndex", weaponsDropIndex, preset.displayWeapons, value)
-		weaponsDrop.m_comboBox:SelectItemByIndex(weaponsDropIndex, true)
-		weaponsDrop.value = weaponsDropIndex
-		weaponsDrop:UpdateParent()
-		localStorage.displayWeapons = preset.displayWeapons
+        updateWeaponsChoiceDrop(preset.displayWeapons)
 
 		lib.setList = preset.sets
-        local editboxText = ''
-        for _, row in pairs(preset.sets) do
-            editboxText = editboxText .. GetItemSetName(row.id) .. '\n'
-        end
-        GearOverviewUISettingsView_Edit3_Label_EditBox.eb:SetText(editboxText)
+        pasteSetsToEditbox(preset.sets)
     end
 end
 
-function createSettingsTab()
+local function createSettingsTab()
     local presetNames = {}
     table.insert(presetNames, NO_PRESET)
     for _, preset in pairs(lib.applicablePresets) do
@@ -255,7 +257,7 @@ function createSettingsTab()
             getFunc = function()
                 return NO_PRESET
             end,
-            setFunc = function(i, value)
+            setFunc = function(_, value)
                 setPreset(value)
             end,
             disabled = function()
@@ -269,7 +271,7 @@ function createSettingsTab()
             getFunc = function()
                 return weaponTypeChoices["WEAPONS_ALL"]
             end,
-            setFunc = function(i, value)
+            setFunc = function(i, _)
                 localStorage.displayWeapons = lib.getTableKeys(weaponTypeChoices)[i]
             end,
             disabled = function()
@@ -304,7 +306,7 @@ function createSettingsTab()
     CreateOptions(parent, Options)
 end
 
-function createScrollList()
+local function createScrollList()
     local scrollData = {
         name = "GearOverviewUIGearViewList",
         parent = GearOverviewUIGearView,
@@ -320,7 +322,7 @@ function createScrollList()
     return scrollList
 end
 
-function createLAMSettings()
+local function createLAMSettings()
     if LAM then
         local panelName = "GearOverviewSettingsPanel"
         LAM:RegisterAddonPanel(panelName, {
@@ -341,4 +343,10 @@ function createLAMSettings()
             },
         })
     end
+end
+
+function lib.createSettings()
+    createSettingsTab()
+    lib.scrollList = createScrollList()
+    createLAMSettings()
 end
