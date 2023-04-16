@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.7.0 (2023-04-16)
+ - Added support for guild specific presets
+ - Preset now also fills the Weapons type dropdown
+ - Fixed leaking variables into global scope
+
 ## 0.6.0 (2023-04-06)
  - Official support for Update 37 Scribes of Fate
  - Added "Archdruid Devyric" monster set for Tanks
