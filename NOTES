@@ -1,0 +1,3 @@
+-- METHOD of executing commands
+-- SLASH_COMMANDS['/script']("GearOverview.debug('ok')")
+-- /script LibChatMessage.Create("X", "X"):Print(tostring(GetGuildId(1)) .. ": " .. GetGuildName(GetGuildId(1)))
