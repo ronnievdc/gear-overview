@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.7.1 (2023-04-18)
+ - Added Pillager's Profit to Rose guild Healer presets
+
 ## 0.7.0 (2023-04-16)
  - Added support for guild specific presets
  - Preset now also fills the Weapons type dropdown
