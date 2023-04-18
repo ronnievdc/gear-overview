@@ -162,7 +162,7 @@ local roseHealerSets = {
 	name = "Healer",
 	displayWeapons = "WEAPONS_HEALER",
 	sets = {
-		SPC, Olorime, OlorimePerf, Sax, SaxPerf, PowerfulAssault, MK, RO, ROPerf, JO,
+		SPC, Pillagers, PillagersPerf, Olorime, OlorimePerf, Sax, SaxPerf, PowerfulAssault, MK, RO, ROPerf, JO,
 		-- Arena
 		RESTO_GrandRejuv, RESTO_GrandRejuvPerf, RESTO_BRP, RESTO_BRPPerf,
 		-- Monster
