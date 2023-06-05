@@ -17,7 +17,7 @@ local NO_PRESET = "No preset"
 --- Callback function to render on set
 --- @param rowControl
 --- @param data table
---- @param scrollList
+--- @param _
 local function SetupDataRow(rowControl, data, _)
     local itemSetId = data.id
     local itemSetName = GetItemSetName(itemSetId)
@@ -25,7 +25,7 @@ local function SetupDataRow(rowControl, data, _)
 
     lib.log(lib.LOG_LEVEL_VERBOSE, "SetupDataRow with displayWeapons", localStorage.displayWeapons)
     if localStorage.displayWeapons == "WEAPONS_TANK" then
-        skipOrderNumbers = { 10, 14, 15, 16, 17, 18, 19, 21 }
+        skipOrderNumbers = { 14, 15, 16, 17, 18, 19, 21 }
     elseif localStorage.displayWeapons == "WEAPONS_HEALER" then
         skipOrderNumbers = { 10, 11, 12, 13, 14, 15, 16, 17, 22 }
     end
@@ -62,14 +62,14 @@ local function SetupDataRow(rowControl, data, _)
             bagItem = lib.bag[itemSetId][i]
         end
 
-        local skipRow = false
+        local skipColumn = false
         for _, OrderIdx in pairs(skipOrderNumbers) do
             if OrderIdx == i then
-                skipRow = true
+                skipColumn = true
             end
         end
 
-        if skipRow then
+        if skipColumn then
             button:SetHidden(true)
         elseif bagItem then
             button:SetTexture("/esoui/art/cadwell/check.dds")
