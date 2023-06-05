@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.8.0 (2023-06-05)
+ - Official support for Update 38 Necrom
+ - Added dagger for Tank S&B preset
+
 ## 0.7.1 (2023-04-18)
  - Added Pillager's Profit to Rose guild Healer presets
 
