@@ -1,6 +1,6 @@
 {
   "name": "eso-gear-overview",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "Provides an interface to display what set items you have",
   "main": "index.js",
   "scripts": {
