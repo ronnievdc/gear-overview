@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.8.1 (2023-08-22)
+ - Official support for Update 39
+
 ## 0.8.0 (2023-06-05)
  - Official support for Update 38 Necrom
  - Added dagger for Tank S&B preset
