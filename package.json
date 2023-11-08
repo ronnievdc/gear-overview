@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "zip": "node create_zip.js",
-    "preversion": "node sync-version && git add GearOverview.txt && git add GearOverview.lua",
+    "version": "node sync-version && git add GearOverview.txt && git add GearOverview.lua",
     "postversion": "npm run zip"
   },
   "repository": {

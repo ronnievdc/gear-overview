@@ -1,6 +1,6 @@
 const JSZip = require("jszip");
 const fs = require("fs");
-const version = require("./package.json").version;
+const version = process.env['npm_package_version'];
 
 const addonName = "GearOverview";
 
