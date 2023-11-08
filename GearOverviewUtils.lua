@@ -38,12 +38,12 @@ end
 
 --- Scans all available sets in the game and creates a mapping from setName to setId
 function lib.scanSets()
-    -- As of "Update 37 Scribes of Fate" there are 690 sets, scan till 750 to be future ready
-    for itemSetId = 1, 750, 1 do
+    for itemSetId = 1, lib.scanMaxSetId, 1 do
         local setName = GetItemSetName(itemSetId)
         if string.len(setName) > 0 then
             lib.setNameToId[string.lower(setName)] = itemSetId
             -- lib.debug(tostring(itemSetId), setName)
+            lib.maxSetId = itemSetId
         end
     end
 end

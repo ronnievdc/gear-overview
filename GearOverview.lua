@@ -10,6 +10,8 @@ lib.applicablePresets = nil
 lib.activePreset = nil
 lib.bag = {}
 lib.setNameToId = {}
+lib.maxSetId = 0
+lib.scanMaxSetId = 800 -- As of "Update 40 Endless Archive" there are 729 sets, scan till 800 to be future ready
 
 local logger
 
