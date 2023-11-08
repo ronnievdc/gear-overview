@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.8.2 (2023-11-08)
+ - Official support for Update 40
+
 ## 0.8.1 (2023-08-22)
  - Official support for Update 39
 
