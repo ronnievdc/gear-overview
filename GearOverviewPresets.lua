@@ -33,6 +33,7 @@ local TT = { name = "Turning Tide", id = 622 }
 local WarMachine = { name = "War Machine", id = 331 }
 local MK = { name = "Way of Martial Knowledge", id = 147 }
 local Zen = { name = "Z'en's Redress", id = 455 }
+local Ozezan = { name = "Ozezan the Inferno", id = 687 }
 
 -- Arena Sword and Board
 local SB_Masters = { name = "Puncturing Remedy", id = 314 } -- Dragonstar Arena
@@ -53,6 +54,8 @@ local RESTO_PreciseRegen = { name = "Precise Regeneration", id = 374 } -- Maelst
 local RESTO_PreciseRegenPerf = { name = "Perfected Precise Regeneration", id = 527 }
 local RESTO_TimelessBlessing = { name = "Timeless Blessing", id = 368 } --  Asylum Sanctorium
 local RESTO_TimelessBlessingPerf = { name = "Perfected Timeless Blessing", id = 362 }
+local DESTRO_Crushing = {name = "Crushing Wall", id = 373}
+local DESTRO_CrushingPerf = {name = "Perfected Crushing Wall", id = 526}
 
 -- Monster
 local Archdruid = { name = "Archdruid Devyric", id = 666 }
@@ -77,7 +80,8 @@ local Pearls = { name = "Pearls of Ehlnofey", id = 576 }
 local WildHunt = { name = "Ring of the Wild Hunt", id = 503 }
 local DeathDealersFete = { name = "Death Dealer's Fete", id = 596 }
 local TonalConstancy = { name = "Torc of Tonal Constancy", id = 505 }
--- WEAPONS_TANK
+
+-- PRESETS
 lib.presets = {
 	{
 		name = "Tank Recommended",
@@ -117,7 +121,7 @@ lib.presets = {
 			Hollowfang, JO, RO, ROPerf, MasterArchitect, Olorime, OlorimePerf, PowerfulAssault, Sax, SaxPerf,
 			Pillagers, PillagersPerf, SPC, StoneTalker, StoneTalkerPerf, MK,
 			-- Monster
-			Symphony, TrollKing, Rkugamz, Naz, Earthgore, Nightflame,
+			Symphony, TrollKing, Rkugamz, Naz, Earthgore, Nightflame, Ozezan,
 			-- Arena
 			RESTO_GrandRejuv, RESTO_GrandRejuvPerf, RESTO_BRP, RESTO_BRPPerf, RESTO_PreciseRegen, RESTO_PreciseRegenPerf,
 			-- Mythic
@@ -132,7 +136,7 @@ lib.presets = {
 			Gossamer, Hollowfang, JO, RO, ROPerf, MasterArchitect, Olorime, OlorimePerf, PowerfulAssault, Sax, SaxPerf,
 			Pillagers, PillagersPerf, SPC, StoneTalker, StoneTalkerPerf, MK, Worms, Zen,
 			-- Monster
-			Symphony, TrollKing, Rkugamz, Encratis, Naz, Earthgore, Nightflame,
+			Symphony, TrollKing, Rkugamz, Encratis, Naz, Earthgore, Nightflame, Ozezan,
 			-- Arena
 			RESTO_GrandRejuv, RESTO_GrandRejuvPerf, RESTO_ForceOverFlow, RESTO_ForceOverFlowPerf,
 			RESTO_PreciseRegen, RESTO_PreciseRegenPerf, RESTO_TimelessBlessing, RESTO_TimelessBlessingPerf,
@@ -154,7 +158,6 @@ local roseTankSets = {
 		SB_Masters, SB_MastersPerf,
 		-- Mythic
 		Spaulder,
-
 	},
 }
 
@@ -162,14 +165,24 @@ local roseHealerSets = {
 	name = "Healer",
 	displayWeapons = "WEAPONS_HEALER",
 	sets = {
-		SPC, Pillagers, PillagersPerf, Olorime, OlorimePerf, Sax, SaxPerf, PowerfulAssault, MK, RO, ROPerf, JO,
+		SPC, Pillagers, PillagersPerf, Sax, SaxPerf, PowerfulAssault, MK, RO, ROPerf, JO,
 		-- Arena
 		RESTO_GrandRejuv, RESTO_GrandRejuvPerf, RESTO_BRP, RESTO_BRPPerf,
 		-- Monster
-		Symphony, Naz,
+		Symphony, Naz, Ozezan,
 		-- Mythic
 		Spaulder, Pearls
 	},
+}
+
+local roseSupportDDSets = {
+	name = "Support DD",
+	displayWeapons = "WEAPONS_DD",
+	sets = {
+		Zen, Alkosh, EC, MK,
+		-- Mythic
+		Spaulder
+	}
 }
 
 lib.guildPresets = {}
@@ -178,28 +191,33 @@ lib.guildPresets = {}
 lib.guildPresets[553666] = {
 	roseTankSets,
 	roseHealerSets,
+	roseSupportDDSets,
 }
 
 -- Spring Rose
 lib.guildPresets[496448] = {
 	roseTankSets,
 	roseHealerSets,
+	roseSupportDDSets,
 }
 
 -- Winter Rose
 lib.guildPresets[422980] = {
 	roseTankSets,
 	roseHealerSets,
+	roseSupportDDSets,
 }
 
 -- Summer Rose
 lib.guildPresets[569338] = {
 	roseTankSets,
 	roseHealerSets,
+	roseSupportDDSets,
 }
 
 -- Midnight Rose
 lib.guildPresets[586676] = {
 	roseTankSets,
 	roseHealerSets,
+	roseSupportDDSets,
 }

@@ -10,6 +10,7 @@ local weaponTypeChoices = {
 	["WEAPONS_ALL"] = "All",
 	["WEAPONS_TANK"] = "Tank (S&B, Ice staff)",
 	["WEAPONS_HEALER"] = "Healer (All staffs)",
+    ["WEAPONS_DD"] = "DD (No resto, no heal)",
 }
 
 local NO_PRESET = "No preset"
@@ -28,6 +29,8 @@ local function SetupDataRow(rowControl, data, _)
         skipOrderNumbers = { 14, 15, 16, 17, 18, 19, 21 }
     elseif localStorage.displayWeapons == "WEAPONS_HEALER" then
         skipOrderNumbers = { 10, 11, 12, 13, 14, 15, 16, 17, 22 }
+    elseif localStorage.displayWeapons == "WEAPONS_DD" then
+        skipOrderNumbers = { 18, 22 }
     end
 
     for i = 1, 22 do

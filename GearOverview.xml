@@ -80,48 +80,55 @@
                             <Anchor point="BOTTOMRIGHT" relativeTo="$(parent)" offsetY="0" offsetX="0"/>
                             <Controls>
                                 <Control name="$(parent)Header">
-                                    <Anchor point="TOPLEFT" relativeTo="$(parent)" offsetX="258" offsetY="0"/>
+                                    <Anchor point="TOPLEFT" relativeTo="$(parent)" offsetX="255" offsetY="0"/>
                                     <Controls>
                                     </Controls>
                                     <OnInitialized>
                                         local textures = {
-                                            "esoui/art/tutorial/gamepad/gp_tooltip_itemslot_head.dds",
-                                            "esoui/art/tutorial/gamepad/gp_tooltip_itemslot_shoulders.dds",
-                                            "esoui/art/tutorial/gamepad/gp_tooltip_itemslot_chest.dds",
-                                            "esoui/art/tutorial/gamepad/gp_tooltip_itemslot_hands.dds",
-                                            "esoui/art/tutorial/gamepad/gp_tooltip_itemslot_waist.dds",
-                                            "esoui/art/tutorial/gamepad/gp_tooltip_itemslot_legs.dds",
-                                            "esoui/art/tutorial/gamepad/gp_tooltip_itemslot_feet.dds",
-                                            "esoui/art/tutorial/gamepad/gp_tooltip_itemslot_neck.dds",
-                                            "esoui/art/tutorial/gamepad/gp_tooltip_itemslot_ring.dds",
-                                            "esoui/art/icons/gear_breton_dagger_d.dds",
-                                            "esoui/art/icons/gear_breton_1haxe_d.dds",
-                                            "esoui/art/icons/gear_breton_1hhammer_d.dds",
-                                            "esoui/art/icons/gear_breton_1hsword_d.dds",
-                                            "esoui/art/icons/gear_breton_2haxe_d.dds",
-                                            "esoui/art/icons/gear_breton_2hhammer_d.dds",
-                                            "esoui/art/icons/gear_breton_2hsword_d.dds",
-                                            "esoui/art/icons/gear_breton_bow_d.dds",
-                                            "esoui/art/progression/icon_healstaff.dds",
-                                            "esoui/art/progression/icon_firestaff.dds",
-                                            "esoui/art/progression/icon_icestaff.dds",
-                                            "esoui/art/progression/icon_lightningstaff.dds",
-                                            "esoui/art/icons/gear_breton_shield_d.dds"
+                                            "esoui/art/tutorial/gamepad/gp_tooltip_itemslot_head.dds",       -- 1
+                                            "esoui/art/tutorial/gamepad/gp_tooltip_itemslot_shoulders.dds",  -- 2
+                                            "esoui/art/tutorial/gamepad/gp_tooltip_itemslot_chest.dds",      -- 3
+                                            "esoui/art/tutorial/gamepad/gp_tooltip_itemslot_hands.dds",      -- 4
+                                            "esoui/art/tutorial/gamepad/gp_tooltip_itemslot_waist.dds",      -- 5
+                                            "esoui/art/tutorial/gamepad/gp_tooltip_itemslot_legs.dds",       -- 6
+                                            "esoui/art/tutorial/gamepad/gp_tooltip_itemslot_feet.dds",       -- 7
+                                            "esoui/art/tutorial/gamepad/gp_tooltip_itemslot_neck.dds",       -- 8
+                                            "esoui/art/tutorial/gamepad/gp_tooltip_itemslot_ring.dds",       -- 9
+                                            "esoui/art/icons/gear_breton_dagger_d.dds",                      -- 10
+                                            "esoui/art/icons/gear_breton_1haxe_d.dds",                       -- 11
+                                            "esoui/art/icons/gear_breton_1hhammer_d.dds",                    -- 12
+                                            "esoui/art/icons/gear_breton_1hsword_d.dds",                     -- 13
+                                            "esoui/art/icons/gear_breton_2haxe_d.dds",                       -- 14
+                                            "esoui/art/icons/gear_breton_2hhammer_d.dds",                    -- 15
+                                            "esoui/art/icons/gear_breton_2hsword_d.dds",                     -- 16
+                                            "esoui/art/icons/gear_breton_bow_d.dds",                         -- 17
+                                            "esoui/art/progression/icon_healstaff.dds",                      -- 18
+                                            "esoui/art/progression/icon_firestaff.dds",                      -- 19
+                                            "esoui/art/progression/icon_icestaff.dds",                       -- 20
+                                            "esoui/art/progression/icon_lightningstaff.dds",                 -- 21
+                                            "esoui/art/icons/gear_breton_shield_d.dds"                       -- 22
                                         }
                                         for i=1,22 do
                                             local button = WINDOW_MANAGER:CreateControl("$(parent)Box"..i, GearOverviewUIGearViewHeader, CT_TEXTURE)
                                             button:SetDimensions(30, 30)
                                             button:SetTexture(textures[i])
                                             if i &lt; 10 then
+                                                -- Body
                                                 button:SetAnchor(TOPLEFT, GearOverviewUIGearViewHeader, TOPLEFT, (i-1)*30, 5)
                                                 button:SetScale(1.25)
                                                 button:SetColor(0.7,0.7,0.7,1)
-                                            elseif i &lt; 18 or i == 22 then
+                                            elseif i &lt; 18 then
+                                                -- Swords &amp; Bow
                                                 button:SetAnchor(TOPLEFT, GearOverviewUIGearViewHeader, TOPLEFT, (i-1)*30, 10)
                                                 button:SetScale(1)
-                                            else
-                                                button:SetAnchor(TOPLEFT, GearOverviewUIGearViewHeader, TOPLEFT, (i-1)*30, 0)
+                                            elseif i &lt; 22 then
+                                                -- Staffs
+                                                button:SetAnchor(TOPLEFT, GearOverviewUIGearViewHeader, TOPLEFT, (i-1)*30-10, 0)
                                                 button:SetScale(1.75)
+                                            elseif i == 22 then
+                                                -- Shield
+                                                button:SetAnchor(TOPLEFT, GearOverviewUIGearViewHeader, TOPLEFT, (i-1)*30, 10)
+                                                button:SetScale(1)
                                             end
                                         end
                                     </OnInitialized>
