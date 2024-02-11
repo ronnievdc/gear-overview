@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.8.3 (2024-02-11)
+ - Added Ozezan to Healer sets
+ - Removed Olorime in Rose Healer sets
+ - Added Rose Support DD sets
+ - Improved alignment of Staff icons
+
 ## 0.8.2 (2023-11-08)
  - Official support for Update 40
 
