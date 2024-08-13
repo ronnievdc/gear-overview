@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.9.0 (2024-08-13)
+ - Added Lucent Echoes to Tank sets
+ - Removed Claw of Yolnahkriin from Tank sets
+ - Official support for Update 42 Gold Road
+
 ## 0.8.3 (2024-02-11)
  - Added Ozezan to Healer sets
  - Removed Olorime in Rose Healer sets
