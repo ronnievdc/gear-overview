@@ -12,6 +12,8 @@ local FrozenWatcher = { name = "Frozen Watcher", id = 433 }
 local Gossamer = { name = "Gossamer", id = 261 }
 local Hollowfang = { name = "Hollowfang Thirst", id = 452 }
 local JO = { name = "Jorvuld's Guidance", id = 346 }
+local Lucent = { name = "Lucent Echos", id = 768 }
+local LucentPerf = { name = "Perfected Lucent Echos", id = 771 }
 local MasterArchitect = { name = "Master Architect", id = 332 }
 local PearlescentWard = { name = "Pearlescent Ward", id = 648 }
 local PearlescentWardPerf = { name = "Perfected Pearlescent Ward", id = 651 }
@@ -88,7 +90,7 @@ lib.presets = {
 		displayWeapons = "WEAPONS_TANK",
 		sets = {
 			-- Full sets
-			Yolna, YolnaPerf, Sax, SaxPerf, Crimson, TT, PowerfulAssault, PearlescentWard, PearlescentWardPerf,
+			Sax, SaxPerf, Crimson, TT, PowerfulAssault, PearlescentWard, PearlescentWardPerf, Lucent, LucentPerf,
 			-- Monster
 			Archdruid, Earthgore, Encratis, EngineGuardian, LadyThorn, Naz, Tremor, SB_VoidBash, SB_VoidBashPerf,
 			-- Arena
@@ -104,6 +106,7 @@ lib.presets = {
 			-- Full sets
 			Yolna, YolnaPerf, Sax, SaxPerf, Crimson, TT, PowerfulAssault, Worms, EC, PearlescentWard, PearlescentWardPerf,
 			Galenwe, GalenwePerf, DragonDefile, Alkosh, FrozenWatcher, WarMachine, MasterArchitect, Olorime, OlorimePerf,
+			Lucent, LucentPerf,
 			-- Monster
 			Encratis, Naz, Earthgore, Rkugamz, Tremor, EngineGuardian, Stonekeeper, TrollKing, Symphony,
 			LordWarden, Thurvokun, Bloodspawn, LadyThorn, Archdruid,
@@ -151,7 +154,7 @@ local roseTankSets = {
 	name = "Tank",
 	displayWeapons = "WEAPONS_TANK",
 	sets = {
-		Yolna, YolnaPerf, Crimson, TT, Sax, SaxPerf, PowerfulAssault, PearlescentWard, PearlescentWardPerf,
+		Crimson, TT, Sax, SaxPerf, PowerfulAssault, PearlescentWard, PearlescentWardPerf, Lucent, LucentPerf,
 		-- Monster
 		Archdruid, Naz, Tremor,
 		-- Areana
