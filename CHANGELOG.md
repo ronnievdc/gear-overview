@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.9.1 (2024-12-29)
+ - Updated Inventory Insight connection to also support version > 3.7.8
+ - Official support for Update ESO 10.2.5
+
 ## 0.9.0 (2024-08-13)
  - Added Lucent Echoes to Tank sets
  - Removed Claw of Yolnahkriin from Tank sets
