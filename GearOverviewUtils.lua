@@ -107,6 +107,28 @@ function lib.processItemLink(itemLink)
     end
 end
 
+function lib.getIIFADatabase()
+    if IIfA.database ~= nil then
+        -- Inventory Insight <= v3.7.8
+        lib.log(lib.LOG_LEVEL_DEBUG, "IIFA: Using the old database format")
+        return IIfA.database
+    end
+
+    if IIFA_DATABASE ~= nil then
+        -- Inventory Insight > v3.7.8
+        if IIfA.currentAccount ~= nil and IIfA.currentServerType ~= nil then
+            lib.log(lib.LOG_LEVEL_DEBUG, "IIFA: Using the new database format")
+            return IIFA_DATABASE[IIfA.currentAccount].servers[IIfA.currentServerType].DBv3
+        else
+            lib.log(lib.LOG_LEVEL_ERROR, "IIFA_DATABASE: No database found for current account on current server")
+            return nil
+        end
+    end
+
+    lib.log(lib.LOG_LEVEL_ERROR, "No valid Inventory Insight database not found")
+    return nil
+end
+
 function lib.fetchItems()
     lib.getItems(BAG_BACKPACK)
     lib.getItems(BAG_BANK)
@@ -114,9 +136,12 @@ function lib.fetchItems()
     lib.getItems(BAG_WORN)
 
     if IIfA then
-        lib.log(lib.LOG_LEVEL_INFO, "Searching IIfA database")
-        for itemLink, _ in pairs(IIfA.database) do
-            lib.processItemLink(itemLink)
+        local iifa_db = lib.getIIFADatabase()
+        if iifa_db ~= nil then
+            lib.log(lib.LOG_LEVEL_INFO, "Searching IIfA database")
+            for itemLink, _ in pairs(iifa_db) do
+                lib.processItemLink(itemLink)
+            end
         end
     else
         lib.log(lib.LOG_LEVEL_INFO, "Download Inventory Insight to add the items for all characters")
