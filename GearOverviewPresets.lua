@@ -35,7 +35,8 @@ local TT = { name = "Turning Tide", id = 622 }
 local WarMachine = { name = "War Machine", id = 331 }
 local MK = { name = "Way of Martial Knowledge", id = 147 }
 local Zen = { name = "Z'en's Redress", id = 455 }
-local Ozezan = { name = "Ozezan the Inferno", id = 687 }
+local Xoryn = { name = "Xoryn's Masterpiece", id = 769 }
+local XorynPerf = { name = "Perfected Xoryn's Masterpiece", id = 770 }
 
 -- Arena Sword and Board
 local SB_Masters = { name = "Puncturing Remedy", id = 314 } -- Dragonstar Arena
@@ -75,6 +76,7 @@ local Thurvokun = { name = "Thurvokun", id = 349 }
 local Bloodspawn = { name = "Bloodspawn", id = 163 }
 local LadyThorn = { name = "Lady Thorn", id = 535 }
 local Nightflame = { name = "Nightflame", id = 167 }
+local TheBlind = { name = "The Blind", id = 738 }
 
 -- Mythic
 local Spaulder = { name = "Spaulder of Ruin", id = 627 }
@@ -154,7 +156,7 @@ local roseTankSets = {
 	name = "Tank",
 	displayWeapons = "WEAPONS_TANK",
 	sets = {
-		Crimson, TT, Sax, SaxPerf, PowerfulAssault, PearlescentWard, PearlescentWardPerf, Lucent, LucentPerf,
+		Sax, SaxPerf, PowerfulAssault, PearlescentWard, PearlescentWardPerf, Lucent, LucentPerf, Yolna, YolnaPerf,
 		-- Monster
 		Archdruid, Naz, Tremor,
 		-- Areana
@@ -168,11 +170,11 @@ local roseHealerSets = {
 	name = "Healer",
 	displayWeapons = "WEAPONS_HEALER",
 	sets = {
-		SPC, Pillagers, PillagersPerf, Sax, SaxPerf, PowerfulAssault, MK, RO, ROPerf, JO,
+		SPC, PowerfulAssault, MK, RO, ROPerf, JO, MasterArchitect, Xoryn, XorynPerf,
 		-- Arena
 		RESTO_GrandRejuv, RESTO_GrandRejuvPerf, RESTO_BRP, RESTO_BRPPerf,
 		-- Monster
-		Symphony, Naz, Ozezan,
+		Symphony, Naz, Ozezan, TheBlind, Archdruid, TheBlind,
 		-- Mythic
 		Spaulder, Pearls
 	},
@@ -182,7 +184,7 @@ local roseSupportDDSets = {
 	name = "Support DD",
 	displayWeapons = "WEAPONS_DD",
 	sets = {
-		Zen, Alkosh, EC, MK,
+		Zen, WarMachine,
 		-- Mythic
 		Spaulder
 	}
