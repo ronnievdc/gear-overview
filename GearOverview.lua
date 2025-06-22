@@ -3,7 +3,7 @@ local lib = GearOverview
 
 lib.name = "GearOverview"
 lib.author = "@ronnievdc"
-lib.version = "0.9.1"
+lib.version = "0.10.0"
 lib.setList = {}
 lib.presets = {}
 lib.applicablePresets = nil
