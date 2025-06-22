@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.10.0 (2025-06-22)
+ - Official support for Update ESO 10.3.5 / Update 46
+ - Updated Rose Guild Presets
+
 ## 0.9.1 (2024-12-29)
  - Updated Inventory Insight connection to also support version > 3.7.8
  - Official support for Update ESO 10.2.5
