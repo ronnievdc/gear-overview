@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.11.0 (2025-11-26)
+ - Official support for Update 47 Feast of Shadows
+ - Updated Rose Guild Presets
+
 ## 0.10.0 (2025-06-22)
  - Official support for Update ESO 10.3.5 / Update 46
  - Updated Rose Guild Presets
