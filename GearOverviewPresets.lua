@@ -19,6 +19,7 @@ local PearlescentWard = { name = "Pearlescent Ward", id = 648 }
 local PearlescentWardPerf = { name = "Perfected Pearlescent Ward", id = 651 }
 local Pillagers = { name = "Pillager's Profit", id = 649 }
 local PillagersPerf = { name = "Perfected Pillager's Profit", id = 650 }
+local Potentates = { name = "Blessing of the Potentates", id = 128 }
 local PowerfulAssault = { name = "Powerful Assault", id = 180 }
 local Alkosh = { name = "Roar of Alkosh", id = 232 }
 local RO = { name = "Roaring Opportunist", id = 496 }
@@ -77,6 +78,7 @@ local Bloodspawn = { name = "Bloodspawn", id = 163 }
 local LadyThorn = { name = "Lady Thorn", id = 535 }
 local Nightflame = { name = "Nightflame", id = 167 }
 local TheBlind = { name = "The Blind", id = 738 }
+local Ozezan = { name = "Ozezan the Inferno", id = 687 }
 
 -- Mythic
 local Spaulder = { name = "Spaulder of Ruin", id = 627 }
@@ -156,11 +158,9 @@ local roseTankSets = {
 	name = "Tank",
 	displayWeapons = "WEAPONS_TANK",
 	sets = {
-		Sax, SaxPerf, PowerfulAssault, PearlescentWard, PearlescentWardPerf, Lucent, LucentPerf, Yolna, YolnaPerf,
+		Sax, SaxPerf, PowerfulAssault, PearlescentWard, PearlescentWardPerf, Lucent, LucentPerf, TT,
 		-- Monster
 		Archdruid, Naz, Tremor,
-		-- Areana
-		SB_Masters, SB_MastersPerf,
 		-- Mythic
 		Spaulder,
 	},
@@ -170,11 +170,11 @@ local roseHealerSets = {
 	name = "Healer",
 	displayWeapons = "WEAPONS_HEALER",
 	sets = {
-		SPC, PowerfulAssault, MK, RO, ROPerf, JO, MasterArchitect, Xoryn, XorynPerf,
+		SPC, Pillagers, PillagersPerf, PowerfulAssault, MK, RO, ROPerf, JO, MasterArchitect, Xoryn, XorynPerf, Potentates,
 		-- Arena
-		RESTO_GrandRejuv, RESTO_GrandRejuvPerf, RESTO_BRP, RESTO_BRPPerf,
+		RESTO_GrandRejuv, RESTO_GrandRejuvPerf,
 		-- Monster
-		Symphony, Naz, Ozezan, TheBlind, Archdruid, TheBlind,
+		Symphony, Naz, Ozezan, TheBlind, Archdruid,
 		-- Mythic
 		Spaulder, Pearls
 	},
@@ -184,9 +184,9 @@ local roseSupportDDSets = {
 	name = "Support DD",
 	displayWeapons = "WEAPONS_DD",
 	sets = {
-		Zen, WarMachine,
-		-- Mythic
-		Spaulder
+		Zen,
+        WarMachine,
+        Alkosh
 	}
 }
 
