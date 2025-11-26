@@ -46,6 +46,7 @@ function lib.scanSets()
             lib.maxSetId = itemSetId
         end
     end
+    lib.log(lib.LOG_LEVEL_DEBUG, "scanSets complete. maxSetId:", lib.maxSetId, " scanMaxSetId:", lib.scanMaxSetId)
 end
 
 --- Gets the position of the item in the matrix

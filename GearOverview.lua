@@ -11,7 +11,7 @@ lib.activePreset = nil
 lib.bag = {}
 lib.setNameToId = {}
 lib.maxSetId = 0
-lib.scanMaxSetId = 900 -- As of "Update 46 Seasons of the Worm Cult Part 1" there are 821 sets, scan till 900 to be future ready
+lib.scanMaxSetId = 1000 -- As of "Update 47 Feast of Shadows" there are 846 sets, scan till 1000 to be future ready
 
 local logger
 
